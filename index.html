@@ -1,6 +1,5 @@
 <!DOCTYPE html> 
 <html> 
-
 <head>
 	<meta charset="utf-8"/>
 	<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
@@ -10,8 +9,8 @@
 
 	<meta property="og:title" content="In Court"/>
     <meta property="og:type" content="website"/>
-    <meta property="og:url" content="http://wejudicate.github.io/incourt/"/>
-    <meta property="og:image" content="http://wejudicate.github.io/incourt/images/Adams.jpg"/>
+    <meta property="og:url" content="http://ma-defenders.github.io/incourt/"/>
+    <meta property="og:image" content="http://ma-defenders.github.io/incourt/images/Adams.jpg"/>
     <meta property="og:site_name" content="In Court"/>
     <meta property="og:description"
           content="A collection of materials the authors find useful to have on hand in court: links, resources re-formatted for mobile, and interactive aids."/>
@@ -61,37 +60,46 @@
 				$('#cclink').addClass("ui-btn-active");			  
 			  }
 		}); 
-	  
+		
+	function tos_test() {
+		var tos = readCookie('tos');
+		if (tos != 1) {
+			$.mobile.changePage('#tos_test', {
+				transition: "none",
+				changeHash: false
+			});
+		}
+	}
+	
 	</script>
 
 </head> 
 
-<body> 
+<body onload="tos_test();"> 
 
 
 <!-- Start of first page: #home -->
 <div data-role="page" id="home">
 	<div data-role="header" data-position="fixed" data-theme="b">
-		<a href="#info" data-iconpos="notext" data-icon="info" data-transition="slideup"></a>
 		<h1>In Court</h1>
+		<a href="#info" data-iconpos="notext" data-icon="info" data-transition="slideup"  class="ui-btn-right"></a>
 		<div data-role="navbar">
 			<ul>
+				<li><a id="cclink" href="#" onClick="$('li.crim').css('display','block');$('li.civ').css('display','block');crim_civ='0';createCookie('area',0,36500);" >No Filter</a></li>		
 				<li><a id="crimlink" href="#" onClick="$('li.crim').css('display','block');$('li.civ').css('display','none');crim_civ='1';createCookie('area',1,36500);" >Criminal</a></li>
 				<li><a id="civlink" href="#" onClick="$('li.crim').css('display','none');$('li.civ').css('display','block');crim_civ='2';createCookie('area',2,36500);" >Civil</a></li>		
-				<li><a id="cclink" href="#" onClick="$('li.crim').css('display','block');$('li.civ').css('display','block');crim_civ='0';createCookie('area',0,36500);" >Both</a></li>		
 			</ul>
 		</div><!-- /navbar -->		
 	</div> 
 	<div id="home_body_crim" data-role="content" style="text-align:left;">	
 			<ul data-role="listview">
 				<li class="crim"><a href="#duty">Duty Day Resources</a></li>
-				<li class="crim"><a href="#yad">YAD Resources</a></li>
-				<li><a href="#rules">Statutes, Cases, &amp; Guides</a></li>
-				<li><a href="#gloss">Tables, Lists, &amp; Glossaries</a></li>
-				<li><a href="#guides">Practice Guides &amp; References</a></li>
+				<li><a href="#guides">Practice Guides</a></li>
+				<li><a href="#rules">Statutes, Cases, Rules et al.</a></li>
 				<li><a href="#interact">Tools &amp; Guesstimators</a></li>		
+				<li><a href="#gloss">Tables, Lists, &amp; Glossaries</a></li>
 				<li><a href="#dir">Directories</a></li>
-				<li><a href="#applications">Legal Apps</a></li>
+				<li><a href="#applications">Legal App Roundup</a></li>
 				<li><a href="updates.html" onClick="createCookie('updates',updates_now,36500);">Updates<span class="ui-li-count"><script type="text/javascript">document.write(updates_unseen);</script></span></a></li>		
 				<li><a href="mailto:incourt@davidcolarusso.com" target="_top"><h3>Contact Curator</h2><p>Tap to email. Suggestions welcome.</p></a></li>
 			</ul>
@@ -110,8 +118,10 @@
 		<ul data-role="listview" data-filter="true" data-filter-placeholder="Search Titles..." data-filter-theme="c" data-theme="c" data-divider-theme="b">
 				<li data-role="list-divider">Quick References</li>
 				<li><a href="#assign">Judicial Assignments</a></li>
+				<li><a href="http://dueprocessr.org/courtcal/" class="ui-btn ui-icon-arrow-u-r ui-btn-icon-right" target="_blank">Due Processr</a></li>
 				<li><a href="#dispo">Disposition Codes</a></li>
 				<li><a href="master.html" data-prefetch><h3>Master Crime List</h3><p><em>May be slow to load/navigate.</em></p></a></li>
+				<li class="crim"><a href="https://www.publiccounsel.net/ya/wp-content/uploads/sites/6/2015/02/DYS2012Grid.pdf">DYS Sentencing Grid</a></li>
 				<li data-role="list-divider">Statutes</li>
 				<li><a href="http://m.malegislature.gov/Laws/GeneralLaws/PartIV/TitleII/Chapter276/Section58" target="">Bail <p class="ui-li-aside">ch 276 &sect;58</p></a></li>
 				<li><a href="http://m.malegislature.gov/Laws/GeneralLaws/PartIV/TitleII/Chapter276/Section58A" target="">Dangerousness <p class="ui-li-aside">ch 276 &sect;58A</p></a></li>
@@ -136,22 +146,23 @@
 <div data-role="page" id="rules">
 	<div data-role="header" data-position="fixed" data-theme="b">
 		<a href="#home" data-rel="back" data-iconpos="notext" data-icon="arrow-l" data-direction="reverse"></a>
-		<h1>Statutes, Cases, Guides, et al.</h1>
+		<h1>Statutes, Cases, Rules, et al.</h1>
 		<a href="#about_rules" data-iconpos="notext" data-theme="c" data-icon="info" data-transition="slideup"></a>
 	</div>
 	<div id="rules_body" data-role="content" style="text-align:left;">	
 			<ul data-role="listview" data-filter="true" data-filter-placeholder="Search Titles..." data-filter-theme="c" data-theme="c" data-divider-theme="b" >
 				<li data-role="list-divider">Guides</li>
 				<li><a href="http://www.mass.gov/courts/case-legal-res/guidelines/mass-guide-to-evidence/">Guide to Evidence</a></li>
-				<li><a href="#jury">Model Jury Instructions</a></li>
+				<li class="crim"><a href="#jury">Model Jury Instructions</a></li>
 				<li data-role="list-divider">Rules</li>
 				<li class="crim"><a href="#crimpro">Rules of Criminal Procedure</a></li>
-				<li><a href="#rpc">Rule of Professional Conduct</a></li>
-				<li><a href="#vop">Dist. Ct. VOP Proceedings</a></li>
+				<li class="civ"><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/civil-procedure/">Rules of Civil Procedure</a></li>
+				<li><a href="#rpc">Rules of Professional Conduct</a></li>
+				<li class="crim"><a href="#vop">Dist. Ct. VOP Proceedings</a></li>
 				<li data-role="list-divider">Statutes</li>
-				<li class="crim"><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV" rel="external">Part IV, Title I</a></li>
-				<li class="civ"><a href=https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXVII/Chapter123 rel="external">Chapter 123</a></li>
-				<li class="crim"><a href=https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXVII/Chapter119 rel="external">Chapter 119</a></li>
+				<li class="crim"><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV" rel="external">Part IV, Title I (crimes)</a></li>
+				<li><a href=https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXVII/Chapter123 rel="external">Chapter 123 (Metal Health)</a></li>
+				<li class="civ"><a href=https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXVII/Chapter119 rel="external">Chapter 119 (Care &amp; Protection)</a></li>
 				<li><a href="https://malegislature.gov/Laws/GeneralLaws/Search/" rel="external">General Laws</a></li>
 				<li><a href="https://malegislature.gov/laws/constitution">MA Constitution</a></li>
 				<li><a href="http://www.archives.gov/exhibits/charters/print_friendly.html?page=constitution_transcript_content.html&title=The%20Constitution%20of%20the%20United%20States%3A%20A%20Transcription">US Constitution</a></li>
@@ -411,41 +422,15 @@
 <div data-role="page" id="guides">
 	<div data-role="header" data-position="fixed" data-theme="b">
 		<a href="#home" data-rel="back" data-iconpos="notext" data-icon="arrow-l" data-direction="reverse"></a>
-		<h1>Practice Guides &amp; References</h1>
+		<h1>Practice Guides</h1>
 		<a href="#about_guides" data-iconpos="notext" data-theme="c" data-icon="info" data-transition="slideup"></a>
 			</div>
 	<div id="gloss_body" data-role="content" style="text-align:left;">	
 		<ul data-role="listview" data-filter="true" data-filter-placeholder="Search Titles..." data-filter-theme="c" data-theme="c" data-divider-theme="b">	
-				<li data-role="list-divider">Children &amp; Families</li>
-					<li><a href="http://www.mass.gov/eohhs/gov/departments/dcf/">Department of Children &amp; Families</a></li>
-					<li><a href="http://www.mass.gov/eohhs/gov/departments/dys/">Department of Youth Services</a></li>
-					<li><a href="https://www.publiccounsel.net/cafl/professional/relevant-statutes-and-case-law/summaries-of-recent-decisions/">Recent Published Decisions</a></li>
-					<li><a href="https://www.publiccounsel.net/cafl/professional/relevant-statutes-and-case-law/relevant-statutes/">Relevant Statutes</a></li>
-					<li><a href="https://www.publiccounsel.net/cafl/professional/social-servicessocial-work/">Social Services/Social Work</a></li>
-				<li class="civ" data-role="list-divider">Mental Health</li>
-					<li class="civ"><a href="docs/dmh-resource-guide.pdf">DMH Resource Guide</a></li>
-					<li class="civ"><a href="docs/consumer-family-resource-guide.pdf">DMH Consumer &amp; Family Resource Guide</a></li>
-	            	<li class="civ"><a href="docs/esp-resource-guide.pdf">Statewide Emergency Service Program Resource Guide</a></li>	
-	            	<li class="civ"><a href="http://www.mass.gov/eohhs/docs/dmh/publications/young-adult-resource-guide.pdf">DMH Young Adult Resource Guide</a></li>
-	           		<li class="civ"><a href="http://www.mass.gov/eohhs/docs/dmh/publications/bipolar-full.pdf">Bipolar Disorder Guidelines</a></li>
-			    	<li class="civ"><a href="http://www.mass.gov/eohhs/docs/dmh/publications/schizophrenia-guidelines-full.pdf">Schizophrenia Guidelines</a></li>
-			    <li class="crim" data-role="list-divider">Public Defender</li>
-			    	<li class="crim"><a href="#massprac">Mass. Criminal Practice</a></li>
-			    <li class="crim" data-role="list-divider">Youth Advocacy</li>
-					<li class="crim"><a href="https://www.publiccounsel.net/ya/wp-content/uploads/sites/6/2014/08/Courtroom-Practice-Guide-to-Bail-Revocation.pdf">Bail Revocation</a></li>
-					<li class="crim"><a href="https://www.publiccounsel.net/ya/wp-content/uploads/sites/6/2014/08/Competency-Legal-Outline.pdf">Competency to Stand Trial</a></li>
-					<li class="crim"><a href="https://www.publiccounsel.net/ya/wp-content/uploads/sites/6/2014/08/detention-talking-points.pdf">Detention</a></li>
-					<li class="crim"><a href="https://www.publiccounsel.net/ya/wp-content/uploads/sites/6/2014/08/Quick-Reference-Guide-to-Evidence.pdf">Evidence</a></li>
-					<li class="crim"><a href="https://www.publiccounsel.net/ya/wp-content/uploads/sites/6/2014/08/harassment-orders.pdf">Harassment Orders</a></li>
-					<li class="crim"><a href="https://www.publiccounsel.net/ya/wp-content/uploads/sites/6/2014/06/Juvenile-Court-Jurisdiction-8.2014.pdf">Juvenile Court Jurisdiction/Juvenile Dispositions</a></li>
-			  		<li class="crim"><a href="https://www.publiccounsel.net/ya/wp-content/uploads/sites/6/2014/08/juvenile-sex-offender-annotated-bibliography.pdf">Juvenile Sex Offenses</a></li>
-			    	<li class="crim"><a href="#massprac">Mass. Criminal Practice</a></li>
-					<li class="crim"><a href="https://www.publiccounsel.net/ya/wp-content/uploads/sites/6/2014/08/Miranda-Outline-January.2015.pdf">Miranda and Juveniles</a></li>
-					<li class="crim"><a href="https://www.publiccounsel.net/ya/wp-content/uploads/sites/6/2014/08/ProbationViolationsOutline2013.pdf">Probation</a></li>
-					<li class="crim"><a href="http://www.clcm.org/2014/school_discipline_quickref10-2014.pdf">School Discipline</a></li>
-					<li class="crim"><a href="https://www.publiccounsel.net/ya/wp-content/uploads/sites/6/2014/08/school-search-and-seizure.pdf">School Search and Seizure</a></li>
-					<li class="crim"><a href="http://www.clcm.org/2014/SPED_Quick_Ref_8_2014.pdf">Special Education</a></li>
-					<li class="crim"><a href="https://www.publiccounsel.net/ya/wp-content/uploads/sites/6/2014/08/OVERVIEW-OF-YOUTHFUL-OFFENDER-LAW.pdf">Youthful Offenders</a></li>
+			<li class="crim"><a href="#massprac">MA Criminal Practice</a></li>
+			<li class="crim"><a href="#yad">Criminal Practice (YAD)</a></li>
+			<li class="civ"><a href="#caflprac">Children and Families</a></li>
+			<li class="civ"><a href="#mhprac">Mental Health</a></li>
 		</ul>
  	</div><!-- /content -->
 </div><!-- /#guides -->
@@ -454,13 +439,14 @@
 <div data-role="page" id="applications">
 	<div data-role="header" data-position="fixed" data-theme="b">
 		<a href="#home" data-rel="back" data-iconpos="notext" data-icon="arrow-l" data-direction="reverse"></a>
-		<h1>Legal Applications</h1>
-		<a href="#about_applications" data-iconpos="notext" data-theme="c" data-icon="info" data-transition="slideup"></a>
+		<h1>Legal Apps</h1>
+		<a href="#about_apps" data-iconpos="notext" data-theme="c" data-icon="info" data-transition="slideup"></a>
 	</div>
 	<div id="gloss_body" data-role="content" style="text-align:left;">	
-		<ul data-role="listview" data-filter="true" data-filter-placeholder="Search Titles..." data-filter-theme="c" data-theme="c" data-divider-theme="b">
-				<li><a href="#iphone">iPhone Applications</a></li>
-				<li><a href="#android">Android Applications</a></li>		
+		<ul data-role="listview" data-filter="false" data-theme="c" data-divider-theme="b">
+				<li><a href="#iphone">iPhone</a></li>
+				<li><a href="#android">Android</a></li>
+				<li><a href="mailto:incourt@davidcolarusso.com" target="_top"><h3>Contact Curator</h2><p>Tap to email. Suggestions welcome.</p></a></li>				
 		</ul>
  	</div><!-- /content -->
 </div><!-- /#applications -->
@@ -469,26 +455,95 @@
 <div data-role="page" id="iphone">
 	<div data-role="header" data-position="fixed" data-theme="b">
 		<a href="#home" data-rel="back" data-iconpos="notext" data-icon="arrow-l" data-direction="reverse"></a>
-		<h1>iPhone Applications</h1>
+		<h1>iPhone Apps</h1>
 		<a href="#about_apps" data-iconpos="notext" data-theme="c" data-icon="info" data-transition="slideup"></a>
 	</div>
 	<div id="dir_body" data-role="content" style="text-align:left;">	
-		<ul data-role="listview" data-filter="true" data-filter-placeholder="Search Titles..." data-filter-theme="c" data-theme="c" data-divider-theme="b">
+		<ul data-role="listview" data-filter="true" data-filter-placeholder="Search Titles and descriptions..." data-filter-theme="c" data-theme="c" data-divider-theme="b">
 				<li data-role="list-divider">Legal Research and Scholarship</li>
-				<li><a href="https://itunes.apple.com/us/app/law-reports/id557548420?mt=8">Bloomberg Law Reports</a></li>
-				<li><a href="https://itunes.apple.com/us/app/fastcase/id352470511?mt=8">Fastcase</a></li>					
-				<li><a href="https://itunes.apple.com/us/app/heinonline-2012/id466881844?mt=8/">HeinOnline</a></li>		
-				<li><a href="https://itunes.apple.com/us/app/lexis-advance-for-solos/id409136268?mt=8">Lexis Advance</a></li>				
-				<li><a href="https://itunes.apple.com/us/app/openregs/id331752432?mt=8">OpenRegs</a></li>	
-				<li><a href="https://itunes.apple.com/us/app/issrn/id334702612?mt=8">Social Science Research Network (SSRN)</a></li>
-				<li><a href="https://itunes.apple.com/us/app/westlawnext/id380675076?mt=8">WestlawNext</a></li>
+				<li>
+					<a href="https://itunes.apple.com/us/app/law-reports/id557548420?mt=8">
+					<img src="http://a3.mzstatic.com/us/r30/Purple1/v4/54/78/5c/54785c9a-6395-2639-755b-500c5f2acae0/icon175x175.jpeg" />
+					<h3>Bloomberg Law Reports</h3>
+					<p>Bloomberg BNA Law Reports deliver original, authoritative and timely reporting and analysis that include key legal, legislative, regulatory or business developments. Our extensive information gathering capabilities include veteran reporters on Capitol Hill and in the federal agencies, plus correspondents covering every state.</p>
+					</a>
+				</li>
+				<li>
+					<a href="https://itunes.apple.com/us/app/fastcase/id352470511?mt=8">
+					<img src="http://a3.mzstatic.com/us/r30/Purple3/v4/7f/60/bd/7f60bdf4-5912-0e71-e3dc-8aa4e2aad72d/icon175x175.png" />
+					<h3>Fastcase</h3>
+					<p>Fastcase for the iPhone/iPad is a free legal research application, putting the American law library in the palm of your hand. Fastcase contains cases and statutes from all 50 states and from the federal government. You can search by citation, keyword (in Boolean or natural language), or browse statute collections.</p>
+					</a>
+				</li>					
+				<li>
+					<a href="https://itunes.apple.com/us/app/heinonline-2012/id466881844?mt=8/">
+					<img src="http://a3.mzstatic.com/us/r30/Purple/v4/ae/24/14/ae241426-01c8-ead4-a1ec-c4cb7ac7634f/icon175x175.jpeg">
+					<h3>HeinOnline</h3>
+					<p>Now you can have access to the world’s largest image-based legal research database, HeinOnline, on your iPhone/iPad. View the image-based PDF’s, access content by citation, browse by volume, navigate a volume with the electronic table of contents, and use full advanced searching techniques. HeinOnline account/authentication is required.</p>
+					</a>
+				</li>		
+				<li>
+					<a href="https://itunes.apple.com/us/app/lexis-advance-for-solos/id409136268?mt=8">
+					<img src="http://a2.mzstatic.com/us/r30/Purple3/v4/58/a2/b5/58a2b5f8-b2c9-a476-8d10-d08d936060d2/icon175x175.jpeg">
+					<h3>Lexis Advance</h3>
+					<p>Transform the way you conduct legal research on the go! Get your hands on the award-winning Lexis Advance® mobile app that was identified by eWEEK and the Consumer Electronics Association as the only innovative mobile app designed to support job efficiency for lawyers!</p>
+					</a>
+				</li>				
+				<li><a href="https://itunes.apple.com/us/app/openregs/id331752432?mt=8">
+					<img src="http://a3.mzstatic.com/us/r30/Purple/v4/52/40/b6/5240b6c3-9959-a893-8378-26dfba78bfc9/icon175x175.png">
+					<h3>OpenRegs</h3>
+					<p>Take the Federal Register with you wherever you go! With the OpenRegs app for the iPhone and iPod Touch you can find recently issued notices of final and proposed rulemaking. Browse by agency or comment periods closing soon or recently opened. You can mark individual regulations with a star and then easily view a list of all your starred regs. Regulations can also be emailed to a friend or to yourself for later reference. Best of all, it's free!</p>
+					</a>
+				</li>	
+				<li><a href="https://itunes.apple.com/us/app/overdrive-media-console/id366869252?mt=8">
+					<img src="http://a3.mzstatic.com/us/r30/Purple2/v4/e8/20/e8/e820e8d1-a2f4-4155-9fc8-f620c9c273e6/icon175x175.png">
+					<h3>OverDrive</h3>
+					<p>Borrow eBooks, audiobooks, and streaming video from your library using OverDrive on your iPad, iPhone, and iPod touch. More than 30,000 libraries worldwide offer titles from OverDrive, so download the app and find your next book today!</p>
+					</a>
+				</li>	
+				<li><a href="https://itunes.apple.com/us/app/issrn/id334702612?mt=8">
+					<img src="http://a5.mzstatic.com/us/r30/Purple3/v4/e6/2b/f7/e62bf75b-4e31-5dab-bf6b-5e7d196a313a/icon175x175.jpeg">
+					<h3>Social Science Research Network (SSRN)</h3>
+					<p>iSSRN is a must have for anyone interested in the social sciences and now, humanities. Social Science Research Network (SSRN) is devoted to the rapid worldwide dissemination of scholarly research.</p>
+					</a>
+				</li>	
+				<li><a href="https://itunes.apple.com/us/app/westlawnext/id380675076?mt=8">
+					<img src="http://a2.mzstatic.com/us/r30/Purple/v4/dd/0f/15/dd0f154f-8b95-767f-46cb-6c0b44be3781/icon175x175.jpeg">
+					<h3>WestlawNext</h3>
+					<p>Tap into the world's most advanced legal research system on-the-go. Access familiar WestlawNext features including, WestSearch™, KeyCite™, Folders, History, document notes and highlighting, browse database content and more -- all redesigned for the iPad multi-touch screen. WestlawNext account required. </p>
+					</a>
+				</li>	
 				<li data-role="list-divider">Legal News</li>
-				<li><a href="https://itunes.apple.com/us/app/aba-journal-for-iphone-ipad/id367064750?mt=8">ABA Journal Daily News</a></li>
-				<li><a href="https://itunes.apple.com/app/the-american-lawyer/id398472628?mt=8">The American Lawyer</a></li>
-				<li><a href="https://itunes.apple.com/app/legal-edge/id333365053?mt=8">Legal Edge</a></li>					
-				<li><a href="https://itunes.apple.com/za/app/legal-news-reader/id308291730?mt=8">Legal News Reader</a></li>		
-				<li><a href="https://itunes.apple.com/us/app/nlj/id661574567?mt=8">National Law Journal</a></li>				
-				<li><a href="https://itunes.apple.com/us/app/iscotusnow/id560979198?mt=8">ISCOTUSNow</a></li>	
+				<li><a href="https://itunes.apple.com/us/app/aba-journal-for-iphone-ipad/id367064750?mt=8">
+					<img src="http://a1.mzstatic.com/us/r30/Purple3/v4/45/36/bc/4536bc72-4143-019e-c9a5-dded0c6bd89e/icon175x175.png">
+					<h3>ABA Journal Daily News</h3>
+					<p>Read summaries of the latest legal news, updated as it happens throughout every business day. Plus find original news reports and analysis, and read in-depth monthly magazine articles, for free wherever you are. Readers also will find contests, galleries, questions, polls and lively comments.</p>
+					</a>
+				</li>	
+				<li><a href="https://itunes.apple.com/app/the-american-lawyer/id398472628?mt=8">
+					<img src="http://a1.mzstatic.com/us/r30/Purple/v4/71/34/f7/7134f7d9-1843-e549-8de3-44a33d922236/icon175x175.jpeg">
+					<h3>The American Lawyer</h3>
+					<p>The nation’s leading legal monthly magazine now accessible through an Ipad app.</p>
+					</a>
+				</li>	
+				<li><a href="https://itunes.apple.com/app/legal-edge/id333365053?mt=8">
+					<img src="http://a5.mzstatic.com/us/r30/Purple/v4/51/d3/32/51d3323f-a79b-56ee-cc51-7361d534ddd3/icon175x175.png">
+					<h3>Legal Edge</h3>
+					<p>Stay on top of the latest legal developments that matter to you with updates, news alerts, and case filings from the nation’s legal professionals. </p>
+					</a>
+				</li>	
+				<li><a href="https://itunes.apple.com/us/app/nlj/id661574567?mt=8">
+					<img src="http://a1.mzstatic.com/us/r30/Purple2/v4/13/1a/23/131a23ba-2819-6cce-2e66-35a07bcf146e/icon175x175.png">
+					<h3>National Law Journal</h3>
+					<p>The National Law Journal stands alone as the weekly newspaper legal professionals rely on for the latest news and analysis.</p>
+					</a>
+				</li>	
+				<li><a href="https://itunes.apple.com/us/app/iscotusnow/id560979198?mt=8">
+					<img src="http://a5.mzstatic.com/us/r30/Purple3/v4/80/c6/81/80c6818e-cd5d-cfe8-ba92-7404e6e703ba/icon175x175.jpeg">
+					<h3>ISCOTUSNow</h3>
+					<p>ISCOTUSnow provides detailed information on all U.S. Supreme Court cases accepted for review or decided by the Court in the current and immediately preceding Terms.</p>
+					</a>
+				</li>	
 		</ul>
  	</div><!-- /content -->
 </div><!-- /#iphone -->
@@ -498,17 +553,38 @@
 <div data-role="page" id="android">
 	<div data-role="header" data-position="fixed" data-theme="b">
 		<a href="#home" data-rel="back" data-iconpos="notext" data-icon="arrow-l" data-direction="reverse"></a>
-		<h1>Android Applications</h1>
+		<h1>Android Apps</h1>
 		<a href="#about_apps" data-iconpos="notext" data-theme="c" data-icon="info" data-transition="slideup"></a>
 	</div>
 	<div id="dir_body" data-role="content" style="text-align:left;">	
-		<ul data-role="listview" data-filter="true" data-filter-placeholder="Search Titles..." data-filter-theme="c" data-theme="c" data-divider-theme="b">
+		<ul data-role="listview" data-filter="true" data-filter-placeholder="Search Titles and descriptions..." data-filter-theme="c" data-theme="c" data-divider-theme="b">
 				<li data-role="list-divider">Legal Research and Scholarship</li>
-				<li><a href="https://play.google.com/store/apps/details?id=com.bigtwit.dlaw.main&feature=more_from_developer">dLaw</a></li>
-				<li><a href="https://play.google.com/store/apps/details?id=com.trgr.next">WestlawNext</a></li>					
+				<li><a href="https://play.google.com/store/apps/details?id=com.bigtwit.dlaw.main&feature=more_from_developer">
+					<img src="https://lh4.ggpht.com/kSrq_utlyEQnBhi2-p9bXj6-h0VGeiS8s2p2c2GiX7SWLt9q30Jv6VkhQiXsD8SAyn4=w300-rw">
+					<h3>dLaw</h3>
+					<p>dLaw (formerly DroidLaw) - Android's #1 legal reference tool for lawyers, law students and professionals.</p>
+					</a>
+				</li>
+				<li><a href="https://play.google.com/store/apps/details?id=com.trgr.next">
+					<img src="https://lh5.ggpht.com/myScWMUgn5dlY03uf6L5l9cJOXOm6dE0H6u3QUnfCmUfTX-XAv0dWL2d0j-nZ5EY6n8=w300-rw">
+					<h3>WestlawNext</h3>
+					<p>The WestlawNext® Android™ app gives you the flexibility to work no matter where or when the need arises. Be ready in an instant with the WestlawNext Android app.
+Doing research on your subway commute? Working at an off-site client meeting? Whether you are a trial attorney in court or a law student preparing for class, gain the competitive edge you need when you access the world's most comprehensive collection of legal content on your Android smartphone or tablet. For help with research, call 1-800-328-0109.</p>
+					</a>
+				</li>				
 				<li data-role="list-divider">Legal News</li>
-				<li><a href="https://play.google.com/store/apps/details?id=com.texterity.android.AmericanLawyer&feature=search_result">The American Lawyer</a></li>				
-				<li><a href="https://play.google.com/store/apps/details?id=com.oyez.scotusnow">ISCOTUSNow</a></li>	
+				<li><a href="https://play.google.com/store/apps/details?id=com.texterity.android.AmericanLawyer&feature=search_result">
+					<img src="https://lh5.ggpht.com/A3Beu8t2c3PLylRQLqwf6iGW5hPrmHiIWHvBoX4HUkAwFfrE0F8c_HTSvB8DTcS4LyZ3=w300-rw">
+					<h3>The American Lawyer</h3>
+					<p>Filled with award-winning feature articles and columns on all aspects of big law, from management to deals and suits to technology, the nation's leading legal monthly magazine is now available through the Android app.</p>
+					</a>
+				</li>
+				<li><a href="https://play.google.com/store/apps/details?id=com.oyez.scotusnow">
+					<img src="https://lh6.ggpht.com/RyQxOsP9fVFV1X0bXjf5KMciYAQ0-jfAwWhljY4QGc-5xk7Z4UB8Facl4heL-AU6HA=w300-rw">
+					<h3>ISCOTUSNow</h3>
+					<p>ISCOTUSnow provides detailed information on all U.S. Supreme Court cases accepted for review or decided by the Court in the current and immediately preceding Terms.</p>
+					</a>
+				</li>
 		</ul>
  	</div><!-- /content -->
  </div><!-- /#android -->
@@ -526,10 +602,10 @@
 		<ul data-role="listview" data-filter="true" data-filter-placeholder="Search Titles..." data-filter-theme="c" data-theme="c" data-divider-theme="b">
 				<li><a href="#bbo" target="">BBO Lookup</a></li>
 				<li><a href="http://www.mass.gov/courts/court-info/courthouses/">Courts</a></li>					
-				<li><a href="http://www.publiccounsel.net/dir/">CPCS</a></li>		
-				<li><a href="DAs.html">District Attorneys</a></li>				
+				<li><a href="http://www.publiccounsel.net/dir/#cpcs_dir">CPCS</a></li>		
+				<li><a href="http://www.masslegalservices.org/findlegalaid">Mass Legal Services</a></li>
+				<li class="crim"><a href="DAs.html">District Attorneys</a></li>				
 				<li class="crim"><a href="doc.html">DOC</a></li>	
-				<!--<li><a href="#mls">Mass Legal Services</a></li>-->
 				<li><a href="#services">Social Services</a></li>
 				<li class="civ"><a href="#dmhoffices">DMH Offices</a></li>
 		</ul>
@@ -792,80 +868,19 @@
  	</div><!-- /content -->
 </div><!-- /#weather -->
 
-
-<!-- Start of first page: #dir -->
-<div data-role="page" id="mls">
-	<div data-role="header" data-position="fixed" data-theme="b">
-		<a href="#home" data-rel="back" data-iconpos="notext" data-icon="arrow-l" data-direction="reverse"></a>
-		<h1>Mass Legal Services Directory</h1>
-		<a href="#about_dir" data-iconpos="notext" data-theme="c" data-icon="info" data-transition="slideup"></a>
-	</div>
-	<div id="dir_body" data-role="content" style="text-align:left;">	
-		<form action="http://www.masslegalservices.org/directory/search" method="get">
-
-This form links directly to the <a href="http://www.masslegalservices.org/directory" target=_bbo>Legal Aid Directory</a> hosted on the Mass Legal Services website: <a href="http://www.masslegalservices.org/">www.masslegalservices.org</a>. 
-<br><br>
-Enter your town or zipcode, then tap "submit."
-
-<div data-role="fieldcontain" class="ui-hide-label">
-	<label for="town">Town:</label>
-	<input type="text" name="town" id="town" value="" placeholder="Town"/>
-
-<p>~ or ~</p>
-
-	<label for="zip">Zip Code:</label>
-	<input type="text" name="zip" id="zip" value="" placeholder="Zip Code"/>
-</div>
-<div data-role="fieldcontain" class="ui-hide-label">
-    <fieldset data-role="controlgroup">
-	   <legend>Would-be client is over 60:</legend>
-	   <input type="checkbox" name="elder[]" id="elder[]" class="custom" value="1"/>
-	   <label for="elder[]">Would-be client is over 60</label>
-    </fieldset>
-</div>
-
-<div data-role="fieldcontain">
-	<select name="priorities" id="priorities">
-<option value="0">Legal Issue (optional)
-</option><option value="CORI">CORI
-</option><option value="Consumer">Consumer
-</option><option value="DCF/DSS">DCF/DSS
-</option><option value="Education">Education
-</option><option value="Elder/Medicare">Elder/Medicare
-</option><option value="Employment Law Issues">Employment Law Issues
-</option><option value="Family Law/Domestic Violence">Family Law/Domestic Violence
-</option><option value="Foreclosure">Foreclosure
-</option><option value="Health/Disability/Mental Health">Health/Disability/Mental Health
-</option><option value="Housing">Housing
-</option><option value="Immigration/Asylum">Immigration/Asylum
-</option><option value="Public Benefits (including TAFDC, EA, EAEDC, Food Stamps/SNAP)">Public Benefits (including TAFDC, EA, EAEDC, Food Stamps/SNAP)
-</option><option value="SSI/SSDI">SSI/SSDI
-</option><option value="Trust and Estates/Probate">Trust and Estates/Probate
-</option><option value="Unemployment Compensation Benefits">Unemployment Compensation Benefits
-</option>
-	</select>
-</div>
-
-<input type=submit value="submit">
-
-		
-		</form>
- 	</div><!-- /content -->
-</div><!-- /#dir -->
-
-
-<!-- Start of first page: #courts -->
-<div data-role="page" id="courts">
+<!-- Start of first page: #QnA -->
+<div data-role="page" id="QnA">
 	<div data-role="header" data-id="foo1" data-position="fixed" data-theme="b">
-		<a href="index.html" data-rel="back" data-iconpos="notext" data-icon="arrow-l" data-direction="reverse"></a>
-		<h1>Courts</h1>
-		<a href="#about_dir" data-iconpos="notext" data-theme="c" data-icon="info" data-transition="slideup"></a>
+		<a href="#home" data-rel="back" data-iconpos="notext" data-icon="arrow-l" data-direction="reverse"></a>
+		<h1>QnA Markup</h1>
 	</div>
-	<div id="courts_v" data-role="content" style="text-align:left;">	
-		Loading...
+	<div id="QnA_v" data-role="content" style="text-align:left;">	
+	QnA Markup is a simple computer language written for lawyers with little or no programming experience. It transforms blocks of text into interactive question and answer sessions (QnAs). These QnAs can be used as stand-alone expert systems or in the aid of rule-based document construction. The entire project is open source, and among other things, that means free. Consequently, QnA is ideal for lawyers and law students looking to turn themselves into attorney-coders. The main site displays an editor where you can author your own QnAs, but be warned, it doesn't look great on a phone. QnAs themselves, however, look quite nice. Check out the sample below.
+	<br><br>
+		<a href="http://www.qnamarkup.org/i/?source=game" data-role="button" target="_blank">View Sample QnA</a>
+		<a href="http://www.qnamarkup.org/" data-role="button" target="_blank">Visit QnA Markup.org</a>
  	</div><!-- /content -->
-</div><!-- /#courts -->
-
+</div><!-- /#QnA -->
 
 <!-- Start of first page: #services -->
 <div data-role="page" id="services">
@@ -891,7 +906,7 @@ Enter your town or zipcode, then tap "submit."
 	<div data-role="header" data-position="fixed" data-theme="b">
 		<a href="#home" data-rel="back" data-iconpos="notext" data-icon="arrow-l" data-direction="reverse"></a>
 		<h1>MA Crim. Practice</h1>
-		<a href="#about_massprac" data-iconpos="notext" data-theme="c" data-icon="info" data-transition="slideup"></a>
+		<a href="#about_guides" data-iconpos="notext" data-theme="c" data-icon="info" data-transition="slideup"></a>
 	</div>
 	<div id="legal_body" data-role="content" style="text-align:left;">	
 		<ul data-role="listview" data-filter="true" data-filter-placeholder="Search..." data-filter-theme="c" data-theme="c" data-divider-theme="b">
@@ -976,10 +991,11 @@ Enter your town or zipcode, then tap "submit."
 	</div>
 	<div id="interact_body" data-role="content" style="text-align:left;">	
 		<ul data-role="listview" data-filter="true" data-filter-placeholder="Search Titles..." data-filter-theme="c" data-theme="c" data-divider-theme="b">
+			<li><a href="http://dueprocessr.org/courtcal/" class="ui-btn ui-icon-arrow-u-r ui-btn-icon-right" target="_blank">Due Processr</a></li>
 			<li><a href="#weather">Historical Weather Data</a></li>
 			<li><a href="#duration">Duration Calculator</a></li>
 			<li><a href="http://translate.google.com/">Google Translate</a></li>
-			<li><a href="http://dueprocessr.org/courtcal/" rel="external">Due Processr</a></li>
+			<li><a href="#QnA">QnA Markup Editor</a></li>
 		</ul>
  	</div><!-- /content -->
 </div><!-- /#interact -->
@@ -989,7 +1005,7 @@ Enter your town or zipcode, then tap "submit."
 	<div data-role="header" data-id="foo1" data-position="fixed" data-theme="b">
 		<a href="index.html" data-rel="back" data-iconpos="notext" data-icon="arrow-l" data-direction="reverse"></a>
 		<h1>DMH Offices</h1>
-		<a href="#about_dmhoffice" data-iconpos="notext" data-theme="c" data-icon="info" data-transition="slideup"></a>
+		<a href="#about_dir" data-iconpos="notext" data-theme="c" data-icon="info" data-transition="slideup"></a>
 	</div>
 	<div id="services_body" data-role="content" style="text-align:left;">	
 		<ul data-role="listview" data-filter="true" data-filter-placeholder="Search..." data-filter-theme="c" data-theme="c" data-divider-theme="b" >
@@ -1265,43 +1281,68 @@ New Bedford, Orleans, Plymouth, Wareham.</p></a></li>
 	<div id="about_v" data-role="content" style="text-align:left;">
 
 		<b>This Site</b>
-		<p>Curated by <a href="https://github.com/colarusso" target=_dc>David Colarusso</a> on <a href="https://github.com/WeJudicate/incourt" target=_gh>GitGub</a>, with contributions from <a href="https://www.publiccounsel.net/it/law-and-tech/" target=_blank>legal tech interns</a> <a href="http://www.jodiegurry.com" target=_blank>Jodie Gurry</a> and <a href="http://www.linkedin.com/in/vmehera" target=_blank>Vedika Mehera</a>.</p> 
-		<p>The pages found under wejudicate.gethub.io/incourt "This Site" are a collection of materials the authors have found useful to have on hand <em>in court</em>. You'll find three flavours of content here:</p>
+		<p>Curated by <a href="https://github.com/colarusso" target=_dc>David Colarusso</a> on <a href="https://github.com/MA-Defenders/incourt" target=_gh>GitGub</a>, with contributions from <a href="https://www.publiccounsel.net/it/law-and-tech/" target=_blank>CPCS legal-tech interns</a> <a href="http://www.jodiegurry.com" target=_blank>Jodie Gurry</a> and <a href="http://www.linkedin.com/in/vmehera" target=_blank>Vedika Mehera</a>.</p> 
+		<p>The pages found under <em>http://ma-defenders.github.io/incourt/</em> "This Site" are a collection of materials the authors have found useful to have on hand <em>in court</em>. You'll find three flavours of content here:</p>
 			<li>good old fashioned links (including deep links) with citation;
-			<li>resources re-formatted for mobile and served from This Site (either in the public domain or used with permission); and 
+			<li>resources re-formatted for mobile and served from This Site (either in the public domain, used with permission, or subject to fair use); and 
 			<li>interactive aids called guesstimators. 
-		<p>Since This Site is optimized for mobile browsing, links aren't always depicted by blue underlined text. All pages on This Site, however, have the same light blue navigation bar at the top.</p>
-		<p>A list of content sources can be found by clicking on the white and gray information buttons on a page's navigation bar. Prior to August 2014, this site was hosted at <a href="http://www.davidcolarusso.com/" target=_blank>DavidColarusso.com</a>.</p>
-		<p>Also, special thanks to Flickr user <a href="http://www.flickr.com/photos/10506176@N07" target=_flickr>Manu_H's</a> (Emmanuel Huybrechts) for his picture of the <a href="http://commons.wikimedia.org/wiki/File:2010_AdamsCourthouse_Boston_4765611709.jpg" target=_wiki>John Adams Courthouse</a>. It can be found at the Wikimedia Commons and is used here under a Creative Commons <a href="http://creativecommons.org/licenses/by/2.0/deed.en" target=_cc>Attribution 2.0 Generic</a> license. Variations on the image are used in this page's Open Graph preview as well as its mobile icon.</p>		
+		<p>Since This Site is optimized for mobile browsing, links aren't always depicted by blue underlined text. All pages on This Site, however, have the same black navigation bar at the top.</p>
+		<p>A list of content sources can be found by clicking on the light-gray "i" button found in a page's navigation bar.</p>
+		<p>Special thanks to Flickr user <a href="http://www.flickr.com/photos/10506176@N07" target=_flickr>Manu_H's</a> (Emmanuel Huybrechts) for his picture of the <a href="http://commons.wikimedia.org/wiki/File:2010_AdamsCourthouse_Boston_4765611709.jpg" target=_wiki>John Adams Courthouse</a>. It can be found at the Wikimedia Commons and is used here under a Creative Commons <a href="http://creativecommons.org/licenses/by/2.0/deed.en" target=_cc>Attribution 2.0 Generic</a> license. Variations on the image are used in this page's Open Graph preview as well as its mobile icon.</p>		
 		<p><b>Suggestions</b></p>
-		<p>I am always looking to improve the content presented here. If you have any suggestions, please let me know. </p>
+		<p>We are always looking to improve the content presented here. If you have any suggestions or concerns, please let us know by emailing the curator.</p>
 		<p><a href="mailto:incourt@davidcolarusso.com?subject=In Court" target="_top" data-role="button" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c" data-bitly-type="bitly_hover_card"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Email Curator</span></span></a></p>
 		<ul data-role="listview" data-inset="true">
 			<li data-role="list-divider">About Sections</li>
-				<li data-icon="arrow-u"><a href="#about_duty" data-transition="slideup">Duty Day Resources</a></li>		
-				<li data-icon="arrow-u"><a href="#about_yad" data-transition="slideup">YAD Resources</a></li>		
-				<li data-icon="arrow-u"><a href="#about_rules" data-transition="slideup">Statutes, Cases, &amp; Guides</a></li>
-				<li data-icon="arrow-u"><a href="#about_gloss" data-transition="slideup">Tables, Lists, &amp; Glossaries</a></li>
-				<li data-icon="arrow-u"><a href="#about_guides" data-transition="slideup">Practice Guides &amp; References</a></li>
+				<li class="crim" data-icon="arrow-u"><a href="#about_duty" data-transition="slideup">Duty Day Resources</a></li>		
+				<li data-icon="arrow-u"><a href="#about_guides" data-transition="slideup">Practice Guides</a></li>
+				<li data-icon="arrow-u"><a href="#about_rules" data-transition="slideup">Statutes, Cases, Rules et al.</a></li>
 				<li data-icon="arrow-u"><a href="#about_interact" data-transition="slideup">Tools &amp; Guesstimators</a></li>		
+				<li data-icon="arrow-u"><a href="#about_gloss" data-transition="slideup">Tables, Lists, &amp; Glossaries</a></li>
 				<li data-icon="arrow-u"><a href="#about_dir" data-transition="slideup">Directories</a></li>
-				<li data-icon="arrow-u"><a href="#about_interact" data-transition="slideup">Legal Apps</a></li>		
+				<li data-icon="arrow-u"><a href="#about_interact" data-transition="slideup">App Roundup</a></li>		
 		</ul>
 		<p><a href="#disclaim" data-role="button" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c" data-bitly-type="bitly_hover_card"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Disclaimer</span></span></a></p>
 	</div><!-- /content -->
 </div><!-- /#info -->
 
-
-<!-- Start of first page: #disclaim -->
-<div data-role="page" id="disclaim">
+<!-- Start of first page: #mhprac -->
+<div data-role="page" id="mhprac">
 	<div data-role="header" data-position="fixed" data-theme="b">
-		<a href="#home" data-rel="back" data-iconpos="notext" data-icon="arrow-l"  data-transition="slideup" data-direction="reverse"></a>
-		<h1>Disclaimer</h1>
+		<a href="#home" data-rel="back" data-iconpos="notext" data-icon="arrow-l" data-direction="reverse"></a>
+		<h1>Mental Health Resources</h1>
+		<a href="#about_guides" data-iconpos="notext" data-theme="c" data-icon="info" data-transition="slideup"></a>
 	</div>
-	<div id="about_v" data-role="content" style="text-align:left;">
-		<b>NO legal advice here.</b> Nothing posted under wejudicate.gethub.io/incourt (The Site) should be construed as legal advice nor does any content provided here, or ones interactions with that content, create an attorney-client relationship. It should be noted that the authors of The Site make no assurances or warranties of any kind, expressed or implied, as to the accuracy, completeness, or reliability of content contained on The Site or on sites to which it links. The Site is offered as a public service. The Site is offered AS IS, and your use of it is strictly at your own risk. 
-	</div><!-- /content -->
-</div><!-- /#info -->
+	<div id="mhprc_body" data-role="content" style="text-align:left;">	
+		<ul data-role="listview" data-filter="true" data-filter-placeholder="Search Titles..." data-filter-theme="c" data-theme="c" data-divider-theme="b">
+			<li class="civ"><a href="docs/dmh-resource-guide.pdf">DMH Resource Guide</a></li>
+			<li class="civ"><a href="docs/consumer-family-resource-guide.pdf">DMH Consumer &amp; Family Resource Guide</a></li>
+	        <li class="civ"><a href="docs/esp-resource-guide.pdf">Statewide Emergency Service Program Resource Guide</a></li>	
+	        <li class="civ"><a href="http://www.mass.gov/eohhs/docs/dmh/publications/young-adult-resource-guide.pdf">DMH Young Adult Resource Guide</a></li>
+	        <li class="civ"><a href="http://www.mass.gov/eohhs/docs/dmh/publications/bipolar-full.pdf">Bipolar Disorder Guidelines</a></li>
+			<li class="civ"><a href="http://www.mass.gov/eohhs/docs/dmh/publications/schizophrenia-guidelines-full.pdf">Schizophrenia Guidelines</a></li>
+		</ul>
+ 	</div><!-- /content -->
+</div><!-- /#mhprac -->
+
+<!-- Start of first page: #caflprac -->
+<div data-role="page" id="caflprac">
+	<div data-role="header" data-position="fixed" data-theme="b">
+		<a href="#home" data-rel="back" data-iconpos="notext" data-icon="arrow-l" data-direction="reverse"></a>
+		<h1>CAFL Resources</h1>
+		<a href="#about_guides" data-iconpos="notext" data-theme="c" data-icon="info" data-transition="slideup"></a>
+	</div>
+	<div id="caflprac_body" data-role="content" style="text-align:left;">	
+		<ul data-role="listview" data-filter="true" data-filter-placeholder="Search Titles..." data-filter-theme="c" data-theme="c" data-divider-theme="b">
+			<li><a href="https://www.publiccounsel.net/cafl/professional/relevant-statutes-and-case-law/relevant-statutes/">Relevant Statutes</a></li>
+			<li><a href="https://www.publiccounsel.net/cafl/professional/relevant-statutes-and-case-law/summaries-of-recent-decisions/">Recent Published Decisions</a></li>
+			<li><a href="https://www.publiccounsel.net/cafl/professional/social-servicessocial-work/">Social Services/Social Work</a></li>	
+			<li><a href="http://www.mass.gov/eohhs/gov/departments/dcf/">Department of Children &amp; Families</a></li>
+			<li><a href="http://www.mass.gov/eohhs/gov/departments/dys/">Department of Youth Services</a></li>
+
+		</ul>
+ 	</div><!-- /content -->
+</div><!-- /#caflprac -->
 
 
 <!-- Start of first page: #yad -->
@@ -1309,12 +1350,10 @@ New Bedford, Orleans, Plymouth, Wareham.</p></a></li>
 	<div data-role="header" data-position="fixed" data-theme="b">
 		<a href="#home" data-rel="back" data-iconpos="notext" data-icon="arrow-l" data-direction="reverse"></a>
 		<h1>YAD Resources</h1>
-		<a href="#about_yad" data-iconpos="notext" data-theme="c" data-icon="info" data-transition="slideup"></a>
+		<a href="#about_guides" data-iconpos="notext" data-theme="c" data-icon="info" data-transition="slideup"></a>
 	</div>
 	<div id="gloss_body" data-role="content" style="text-align:left;">	
 		<ul data-role="listview" data-filter="true" data-filter-placeholder="Search Titles..." data-filter-theme="c" data-theme="c" data-divider-theme="b">
-				<li data-role="list-divider">Sentencing</li>
-					<li><a href="https://www.publiccounsel.net/ya/wp-content/uploads/sites/6/2015/02/DYS2012Grid.pdf">DYS Grid</a></li>
 				<li data-role="list-divider">Practice Guides</li>
 					<li><a href="https://www.publiccounsel.net/ya/wp-content/uploads/sites/6/2014/08/Courtroom-Practice-Guide-to-Bail-Revocation.pdf">Bail Revocation</a></li>
 					<li><a href="https://www.publiccounsel.net/ya/wp-content/uploads/sites/6/2014/08/Competency-Legal-Outline.pdf">Competency to Stand Trial</a></li>
@@ -1338,7 +1377,8 @@ New Bedford, Orleans, Plymouth, Wareham.</p></a></li>
 					<li><a href="https://www.publiccounsel.net/ya/wp-content/uploads/sites/6/2014/08/Selected-Consequences-of-Juvenile-Adjudications-in-Massachusetts.pdf">Consequences (Generally)</a></li>
 					<li><a href="https://www.publiccounsel.net/ya/wp-content/uploads/sites/6/2014/08/Collateral-Consequences-Checklist-2013.pdf">Collateral Consequences Checklist</a></li>
 					<li><a href="http://www.publiccounsel.net/iiu/wp-content/uploads/sites/15/2014/08/Immigration-Consequences-for-Juveniles-9-20-14.pdf">Immigration Consequences for Juveniles</a></li>
-
+				<li data-role="list-divider">Sentencing</li>
+					<li><a href="https://www.publiccounsel.net/ya/wp-content/uploads/sites/6/2015/02/DYS2012Grid.pdf">DYS Grid</a></li>
 		</ul>
  	</div><!-- /content -->
 </div><!-- /#yad -->
@@ -1351,17 +1391,16 @@ New Bedford, Orleans, Plymouth, Wareham.</p></a></li>
 	</div>
 	<div id="about_v" data-role="content" style="text-align:left;">	
 		<b>Duty Day Resources</b>
-		<p>This page was inspired by a binder given to me when I first started working as an attorney. It contained a collection of useful statutes and the like, many of which can be found here. H/T <a href="https://twitter.com/JGauthor" target="twitter">@JGauthor</a></p>
-		<p><em>Judicial Assignments</em> contains individual direct links to the Social Law Library's <a href="https://www.socialaw.com/docs/default-source/judicial-assignments/superior.pdf?sfvrsn=34" target=_source">list of judicial assignments</a>. <em>Links valid as of 2012-09-15</em>.</p>		
-		<p>The <a href="http://www.mass.gov/courts/probation/dispositioncodes.htm" target="_source"><em>Disposition Codes</em></a> where collected from public domain information found on the Massachusetts Court's webpage. <em>Updated 2012-09-09</em>.</p>
-		<p>The <em>Guesstimator</em> was coded for This Site based upon a synthesis of various documents. It has its own "about" section with more detail.</p>
-		<p>The <em>Master Crime List</em> was adapted from public domain information, namely the Excel version of the "Felony and Misdemeanor Master Crime List of the Massachusetts Sentencing Commission" found on the Massachusetts Court's <a href="http://www.mass.gov/courts/admin/sentcomm.html" target="_source">Sentencing Commission page</a>. <em>Updated 2012-09-09</em>.</p>
-		<p>The <em>Statutes</em> are all direct links to the Massachusetts Legislature's mobile-optimized <a href="http://m.malegislature.gov/" target="_source">General Laws</a>. <em>Links valid as of 2012-09-15</em>.</p>  
-		<p><em>Rules of Criminal Procedure</em> contains individual direct links to each Massachusetts rule of <a href="http://www.lawlib.state.ma.us/source/mass/rules/criminal/index.html" target=_source">criminal procedure</a> as hosted on the Massachusetts Trial Court Law Library's website. <em>Links good as of 2012-09-16</em>.</p>	
-		<p><em>Dist. Ct. VOP Proceedings</em> contains individual direct links to each Massachusetts District Court Rule of <a href="http://www.lawlib.state.ma.us/source/mass/rules/district/probation/index.html" target=_source">probation violation proceedings</a> as hosted on the Massachusetts Trial Court Law Library's website. <em>Links good as of 2012-10-30</em>.</p>	
-		<p>Other <em>Rules</em> are links to the Massachusetts Trial Court Law Library's <a href="http://www.lawlib.state.ma.us/source/mass/rules/index.html" target="_source">Court Rules</a>. <em>Links valid as of 2012-09-15</em>.</p>  
+		<p>This page was inspired by the binders given to new CPCS attorneys. They general contain a collection of useful statutes and the like, many of which can be found here. H/T <a href="https://twitter.com/JGauthor" target="twitter">@JGauthor</a></p>
+		<p><em>Judicial Assignments</em> contains individual direct links to the Social Law Library's <a href="https://www.socialaw.com/services/judicial-assignments" target=_source">list of judicial assignments</a>. <em>Links valid as of 2012-09-15</em>.</p>		
+		<p>The <em>Disposition Codes</em> where collected from public domain information found on the Massachusetts Court's webpage and no longer available at the original location.</p>
+		<p>The <em>Master Crime List</em> was adapted from public domain information, namely the Excel version of the "Felony and Misdemeanor Master Crime List of the Massachusetts Sentencing Commission" found on the Massachusetts Court's <a href="http://www.mass.gov/courts/court-info/trial-court/sent-commission/" target="_source">Sentencing Commission page</a>. <em>Updated 2015-04-14</em>.</p>
+		<p>The <em>Statutes</em> are all direct links to the Massachusetts Legislature's mobile-optimized <a href="http://m.malegislature.gov/" target="_source">General Laws</a>. <em>Links valid as of 2015-04-14</em>.</p>  
+		<p><em>Rules of Criminal Procedure</em> contains individual direct links to each Massachusetts rule of <a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/" target=_source">criminal procedure</a> as hosted on the Massachusetts Trial Court Law Library's website. <em>Links good as of 2015-04-14</em>.</p>	
+		<p><em>Dist. Ct. VOP Proceedings</em> contains individual direct links to each Massachusetts District Court Rule of <a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/district-muni/probation/" target=_source">probation violation proceedings</a> as hosted on the Massachusetts Trial Court Law Library's website. <em>Links good as of 2015-04-14</em>.</p>	
+		<p>Other <em>Rules</em> are links to the Massachusetts Trial Court Law Library's <a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/" target="_source">Court Rules</a>. <em>Links valid as of 2015-04-14</em>.</p>  
 		<p><b>Suggestions</b></p>
-		<p>I am always looking to improve the content presented here. If you have any suggestions, please let me know. </p>
+		<p>We are always looking to improve the content presented here. If you have any suggestions or concerns, please let us know by emailing the curator.</p>
 		<p><a href="mailto:incourt@davidcolarusso.com?subject=Duty Day Resources" target="_top" data-role="button" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c" data-bitly-type="bitly_hover_card"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Email Curator</span></span></a></p>
 		<p><a href="#disclaim" data-role="button" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c" data-bitly-type="bitly_hover_card"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Disclaimer</span></span></a></p>
 	</div><!-- /content -->
@@ -1376,9 +1415,9 @@ New Bedford, Orleans, Plymouth, Wareham.</p></a></li>
 	</div>
 	<div id="about_v" data-role="content" style="text-align:left;">	
 		<b>Disposition Codes</b>
-		<p>The <a href="http://www.mass.gov/courts/probation/dispositioncodes.htm" target="_source"><em>Disposition Codes</em></a> where collected from public domain information found on the Massachusetts Court's webpage. <em>Updated 2012-09-09</em>.</p>
+		<p>The <em>Disposition Codes</em> where collected from public domain information found on the Massachusetts Court's webpage but no longer available at that location.</p>
 		<p><b>Suggestions</b></p>
-		<p>I am always looking to improve the content presented here. If you have any suggestions, please let me know. </p>
+		<p>We are always looking to improve the content presented here. If you have any suggestions or concerns, please let us know by emailing the curator.</p>
 		<p><a href="mailto:incourt@davidcolarusso.com?subject=Disposition Codes" target="_top" data-role="button" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c" data-bitly-type="bitly_hover_card"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Email Curator</span></span></a></p>
 		<p><a href="#disclaim" data-role="button" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c" data-bitly-type="bitly_hover_card"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Disclaimer</span></span></a></p>
 	</div><!-- /content -->
@@ -1394,9 +1433,9 @@ New Bedford, Orleans, Plymouth, Wareham.</p></a></li>
 	</div>
 	<div id="about_v" data-role="content" style="text-align:left;">	
 		<b>Judicial Assignments</b>
-		<p>This section contains individual direct links to the Social Law Library's <a href="http://www.socialaw.com/ja-district.htm" target=_source">list of judicial assignments</a>. <em>Links valid as of 2012-09-15</em>.</p>		
+		<p>This section contains individual direct links to the Social Law Library's <a href="http://www.socialaw.com/ja-district.htm" target=_source">list of judicial assignments</a>. <em>Links valid as of 2015-04-14</em>.</p>		
 <p><b>Suggestions</b></p>
-		<p>I am always looking to improve the content presented here. If you have any suggestions, please let me know. </p>
+		<p>We are always looking to improve the content presented here. If you have any suggestions or concerns, please let us know by emailing the curator.</p>
 		<p><a href="mailto:incourt@davidcolarusso.com?subject=Judicial Assignments" target="_top" data-role="button" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c" data-bitly-type="bitly_hover_card"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Email Curator</span></span></a></p>
 		<p><a href="#disclaim" data-role="button" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c" data-bitly-type="bitly_hover_card"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Disclaimer</span></span></a></p>
 	</div><!-- /content -->
@@ -1415,7 +1454,7 @@ New Bedford, Orleans, Plymouth, Wareham.</p></a></li>
 		<p><em>Date Duration Calculator</em> links directly to <a href="http://www.timeanddate.com/date/duration.html" target=_duration>Date Duration Calculator</a> hosted on <a href="http://www.timeanddate.com/" target=_duration>www.timeanddate.com</a>. <em>Updated 2014-04-22</em>.</p>
 		<p><em>Google Translate</em> links directly to <a href="http://translate.google.com/" target=_translate>Google Traslate</a>. <em>Updated 2014-04-22</em>.</p>
 		<p><b>Suggestions</b></p>
-		<p>I am always looking to improve the content presented here. If you have any suggestions, please let me know. </p>
+		<p>We are always looking to improve the content presented here. If you have any suggestions or concerns, please let us know by emailing the curator.</p>
 		<p><a href="mailto:incourt@davidcolarusso.com?subject=Guesstimators" target="_top" data-role="button" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c" data-bitly-type="bitly_hover_card"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Email Curator</span></span></a></p>
 		<p><a href="#disclaim" data-role="button" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c" data-bitly-type="bitly_hover_card"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Disclaimer</span></span></a></p>
 	</div><!-- /content -->
@@ -1429,7 +1468,7 @@ New Bedford, Orleans, Plymouth, Wareham.</p></a></li>
 		<h1>About</h1>
 	</div>
 	<div id="about_v" data-role="content" style="text-align:left;">	
-		<b>Statutes, Cases, Guides, et al.</b>
+		<b>Statutes, Cases, Rules, et al.</b>
 		<p><em>General Laws</em> links directly to the Massachusetts Legislature's mobile-optimized  General Laws <a href="https://malegislature.gov/Laws/GeneralLaws/Search/" target="_source">search feature</a>. <em>Link good as of 2014-04-23</em>.</p>
 		<p><em>Guide to Evidence</em> links directly to the Supreme Judicial Court's <a href="http://www.mass.gov/courts/case-legal-res/guidelines/mass-guide-to-evidence/"_source">Massachusetts Guide to Evidence</a>. <em>Link good as of 2015-02-25</em>.</p>
 		<p><em>Jury Instructions</em> contains individual direct links to the Massachusetts Court's District Court <a href="http://www.mass.gov/courts/court-info/trial-court/dc/dc-crim-model-jury-inst-gen.html" target="_source">Model Jury Instructions</a>. <em>Links good as of 2014-04-23</em>.</p>
@@ -1445,7 +1484,7 @@ New Bedford, Orleans, Plymouth, Wareham.</p></a></li>
 		<p><em>Bill of Rights</em> links directly to a transcript of <a href="http://www.archives.gov/exhibits/charters/print_friendly.html?page=bill_of_rights_transcript_content.html&title=The%20Bill%20of%20Rights%3A%20A%20Transcription" target=_source>The Bill of Rights</a> hosted by the National Archives. <em>Link good as of 2012-11-18</em>.</p>					
 		<p><em>US Const. Amendments 11-27</em> links directly to a transcript of <a href="http://www.archives.gov/exhibits/charters/print_friendly.html?page=constitution_amendments_11-27_content.html&title=The%20Constitution%20of%20the%20United%20States%3A%20Amendments%2011-27" target=_source>The Constitution: Amendments 11-27</a> hosted by the National Archives. <em>Link good as of 2012-11-18</em>.</p>					
 		<p><b>Suggestions</b></p>
-		<p>I am always looking to improve the content presented here. If you have any suggestions, please let me know. </p>
+		<p>We are always looking to improve the content presented here. If you have any suggestions or concerns, please let us know by emailing the curator.</p>
 		<p><a href="mailto:incourt@davidcolarusso.com?subject=Statutes, Cases, Guides, et al." target="_top" data-role="button" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c" data-bitly-type="bitly_hover_card"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Email Curator</span></span></a></p>
 		<p><a href="#disclaim" data-role="button" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c" data-bitly-type="bitly_hover_card"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Disclaimer</span></span></a></p>
 	</div><!-- /content -->
@@ -1468,7 +1507,7 @@ New Bedford, Orleans, Plymouth, Wareham.</p></a></li>
 		<p>The <a href="http://www.mass.gov/courts/court-info/trial-court/sent-commission/ma-sentencing-grid-gen.html">Sentencing Guidelines Grid</a> links to the relevant portion of the Massachusetts Court's <em>Sentencing Guidelines</em>. <em>Updated 2013-03-10</em>.</p>
 		<p>The <a href="https://www.publiccounsel.net/ya/wp-content/uploads/sites/6/2015/02/DYS2012Grid.pdf">DYS Sentencing Grid</a> links to the relevant portion of the Department of Youth Services <em>Sentencing Guidelines</em>. <em>Link valid as of 2015-04-10</em>.</p>
 		<p><b>Suggestions</b></p>
-		<p>I am always looking to improve the content presented here. If you have any suggestions, please let me know. </p>
+		<p>We are always looking to improve the content presented here. If you have any suggestions or concerns, please let us know by emailing the curator.</p>
 		<p><a href="mailto:incourt@davidcolarusso.com?subject=Glossaries and Keys" target="_top" data-role="button" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c" data-bitly-type="bitly_hover_card"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Email Curator</span></span></a></p>
 		<p><a href="#disclaim" data-role="button" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c" data-bitly-type="bitly_hover_card"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Disclaimer</span></span></a></p>
 	</div><!-- /content -->
@@ -1482,36 +1521,22 @@ New Bedford, Orleans, Plymouth, Wareham.</p></a></li>
 	</div>
 	<div id="about_v" data-role="content" style="text-align:left;">	
 		<b>Practice Guides & References</b>
-		<p>The <em>Children &amp; Families Resources</em> come directly from the Professional Resource page listed at the <a href="https://www.publiccounsel.net/cafl/professional/">Children &amp; Families Department website</a>. <em>Links valid as of 2015-04-10</em>.</p>
+		<p class="crim">The <em>Massachusetts Criminal Practice</em> section contains links to chapters 1 through 50 of <a href="http://www.law.suffolk.edu/MCP/">Massachusetts Criminal Practice</a> edited by <a href="http://www.suffolk.edu/law/faculty/Eric_Blumenson.php">Eric Blumenson</a> and <a href="http://www1.law.wne.edu/faculty/index.cfm?selection=doc.9735&uid=227">Arthur Leavens</a>. <em>Links valid as of 2012-12-02</em></p>
+		<p class="crim">The <em>Criminal Practice (Youth Advocacy Division)</em> come directly from the Professional Resource page listed at the <a href="https://www.publiccounsel.net/ya/professional-resources/">Youth Advocacy Division website</a>. <em>Links valid as of 2015-04-10</em>.</p>
+
+		<p class="civ">The <em>Children &amp; Families Resources</em> come directly from the Professional Resource page listed at the <a href="https://www.publiccounsel.net/cafl/professional/">Children &amp; Families Division website</a>. <em>Links valid as of 2015-04-10</em>.</p>
 		<p><em>DMH Resource Guide</em> is a word document converted to PDF that is available at the <a href="http://www.mass.gov/eohhs/provider/guidelines-resources/clinical-treatment/mental-health/dmh-resource-guides.html">Massachusetts Health and Human Services website.</a> <em>Document valid as of 2015-04-10</em>.</p>		
 		<p><em>DMH Consumer and Family Resource Guide</em> is a word document converted to PDF that is available at the <a href="http://www.mass.gov/eohhs/provider/guidelines-resources/clinical-treatment/mental-health/dmh-resource-guides.html">Massachusetts Health and Human Services website.</a> <em>Document valid as of 2015-04-10</em>.</p>
 		<p><em>Statewide Emergency Service Program Resource Guide</em> is a word document converted to PDF that is available at the <a href="http://www.mass.gov/eohhs/provider/guidelines-resources/clinical-treatment/mental-health/dmh-resource-guides.html">Massachusetts Health and Human Services website.</a> <em>Document valid as of 2015-04-10</em>.</p>
 		<p><em>DMH Young Adult Resource Guide</em> links directly to a guide on the <a href="http://www.mass.gov/eohhs/docs/dmh/publications/young-adult-resource-guide.pdf"> Massachusetts Health and Human Services website.</a> <em> Link valid as of 2015-04-10</em>
 		<p><em>Bipolar Disorder Guidelines</em> links directly to a guide on the <a href="http://www.mass.gov/eohhs/docs/dmh/publications/bipolar-full.pdf"> Massachusetts Health and Human Services website.</a> <em> Link valid as of 2015-04-10</em>
 		<p><em>Schizophrenia Guidelines</em> links directly to a guide on the <a href="http://www.mass.gov/eohhs/docs/dmh/publications/schizophrenia-guidelines-full.pdf"> Massachusetts Health and Human Services website.</a> <em> Link valid as of 2015-04-10</em>
-		<p>The <em>Youth Advocacy Resources</em> come directly from the Professional Resource page listed at the <a href="https://www.publiccounsel.net/ya/professional-resources/">Youth Advocacy Department website</a>. <em>Links valid as of 2015-04-10</em>.</p>
 		<p><b>Suggestions</b></p>
-		<p>I am always looking to improve the content presented here. If you have any suggestions, please let me know. </p>
+		<p>We are always looking to improve the content presented here. If you have any suggestions or concerns, please let us know by emailing the curator.</p>
 		<p><a href="mailto:incourt@davidcolarusso.com?subject=Glossaries and Keys" target="_top" data-role="button" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c" data-bitly-type="bitly_hover_card"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Email Curator</span></span></a></p>
 		<p><a href="#disclaim" data-role="button" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c" data-bitly-type="bitly_hover_card"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Disclaimer</span></span></a></p>
 	</div><!-- /content -->
 </div><!-- /#about_guides -->
-
-<!-- Start of first page: #about_yad -->
-<div data-role="page" id="about_yad">
-	<div data-role="header" data-position="fixed" data-theme="b">
-		<a href="#mglossgl" data-rel="back" data-iconpos="notext" data-icon="arrow-d"  data-transition="slideup" data-direction="reverse"></a>
-		<h1>About</h1>
-	</div>
-	<div id="about_v" data-role="content" style="text-align:left;">	
-		<b>Youth Advocacy Resources</b>
-		<p>The <em>Youth Advocacy Resources</em> come directly from the Professional Resource page listed at the <a href="https://www.publiccounsel.net/ya/professional-resources/">Youth Advocacy Department website</a>. <em>Links valid as of 2015-04-10</em>.</p>
-		<p><b>Suggestions</b></p>
-		<p>I am always looking to improve the content presented here. If you have any suggestions, please let me know. </p>
-		<p><a href="mailto:incourt@davidcolarusso.com?subject=Glossaries and Keys" target="_top" data-role="button" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c" data-bitly-type="bitly_hover_card"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Email Curator</span></span></a></p>
-		<p><a href="#disclaim" data-role="button" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c" data-bitly-type="bitly_hover_card"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Disclaimer</span></span></a></p>
-	</div><!-- /content -->
-</div><!-- /#about_yad -->
 
 
 <!-- Start of first page: #about_dir -->
@@ -1527,11 +1552,11 @@ New Bedford, Orleans, Plymouth, Wareham.</p></a></li>
 		<p>The list of <em>CPCS offices</em> is a direct link to the <a href="http://www.publiccounsel.net/dir/" target="_source">list of offices</a> found on CPCS's website. <em>Link valid as of 2012-09-15</em>.<p>
 		<p>The list of <em>District Attorneys</em> are direct links to the <a href="http://www.mass.gov/mdaa/district-attorneys/by-city-or-town.html" target="_source">list of District Attorneys by City or Town</a> found on the mass.gov website. <em>Link valid as of 2012-10-03</em>.<p>
 		<p><em>DOC</em> is a compilation of public domain information from the Department of Corrections' list of <a href="http://www.mass.gov/eopss/law-enforce-and-cj/prisons/doc-facilities/" target="_source">Facilities</a>. <em>Updated on 2012-09-15</em>.</p>
-		<!--<p><em>Mass Legal Services</em> presents a form that links directly to the <a href="http://www.masslegalservices.org/directory" target="_source">Legal Aid Directory</a> found on the Mass Legal Services website. <em>Link valid as of 2014-04-23</em>.</p>-->
+		<p><em>Mass Legal Services</em> links to the <a href="http://www.masslegalservices.org/findlegalaid" target="_source">Legal Resource Finder</a> on the Mass Legal Services website. <em>Link valid as of 2015-04-10</em>.</p>
 		<p>The <em>Social Services</em> list was compiled under the direction of Kirsten Lewis, a social service advocate with CPCS. <em>Updated on 2012-10-29</em>.</p>
 		<p><em> DMH Offices </em> links to the <a href="http://www.mass.gov/eohhs/provider/guidelines-resources/clinical-treatment/mental-health/dmh-offices/"> Massachusetts Health and Human Services </a> website that provides a list of office locations. <em> Link valid as of 2014-04-10. </em>
 		<p><b>Suggestions</b></p>
-		<p>I am always looking to improve the content presented here. If you have any suggestions, please let me know. </p>
+		<p>We are always looking to improve the content presented here. If you have any suggestions or concerns, please let us know by emailing the curator.</p>
 		<p><a href="mailto:incourt@davidcolarusso.com?subject=Institutions and Attorneys" target="_top" data-role="button" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c" data-bitly-type="bitly_hover_card"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Email Curator</span></span></a></p>
 		<p><a href="#disclaim" data-role="button" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c" data-bitly-type="bitly_hover_card"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Disclaimer</span></span></a></p>
 	</div><!-- /content -->
@@ -1544,48 +1569,31 @@ New Bedford, Orleans, Plymouth, Wareham.</p></a></li>
 		<h1>About</h1>
 	</div>
 	<div id="about_v" data-role="content" style="text-align:left;">	
-		<b>iPhone Applications</b>
-			<p><em>Bloomberg Law Reports</em> is a link to the iPhone application available on the <a href="https://itunes.apple.com/us/app/law-reports/id557548420?mt=8"> iTunes Store.</a> <em>Link valid as of 2015-04-10</em>.</p>		
-			<p><em>Fastcase</em> is a link to the iPhone application available on the <a href="https://itunes.apple.com/us/app/fastcase/id352470511?mt=8"> iTunes Store.</a> <em>Link valid as of 2015-04-10</em>.</p>
-			<p><em>HeinOnline</em> is a link to the iPhone application available on the <a href="https://itunes.apple.com/us/app/heinonline-2012/id466881844?mt=8/"> iTunes Store.</a> <em>Link valid as of 2015-04-10</em>.</p>
-			<p><em>Lexis Advance</em> is a link to the iPhone application available on the <a href="https://itunes.apple.com/us/app/lexis-advance-for-solos/id409136268?mt=8"> iTunes Store.</a> <em>Link valid as of 2015-04-10</em>.</p>
-			<p><em>OpenRegs</em> is a link to the iPhone application available on the <a href="https://itunes.apple.com/us/app/openregs/id331752432?mt=8"> iTunes Store.</a> <em>Link valid as of 2015-04-10</em>.</p>
-			<p><em>Social Science Research Network (SSRN)</em> is a link to the iPhone application available on the <a href="https://itunes.apple.com/us/app/issrn/id334702612?mt=8"> iTunes Store.</a> <em>Link valid as of 2015-04-10</em>.</p>
-			<p><em>WestlawNext</em> is a link to the iPhone application available on the <a href="https://itunes.apple.com/us/app/westlawnext/id380675076?mt=8"> iTunes Store.</a> <em>Link valid as of 2015-04-10</em>.</p>
-			<p><em>ABA Daily Journal News </em> is a link to the iPhone application available on the <a href="https://itunes.apple.com/us/app/aba-journal-for-iphone-ipad/id367064750?mt=8"> iTunes Store.</a> <em>Link valid as of 2015-04-10</em>.</p>
-			<p><em>The American Lawyer</em> is a link to the iPhone application available on the <a href="https://itunes.apple.com/app/the-american-lawyer/id398472628?mt=8"> iTunes Store.</a> <em>Link valid as of 2015-04-10</em>.</p>
-			<p><em>Legal Edge</em> is a link to the iPhone application available on the <a href="https://itunes.apple.com/app/legal-edge/id333365053?mt=8"> iTunes Store.</a> <em>Link valid as of 2015-04-10</em>.</p>
-			<p><em>Legal News Reader</em> is a link to the iPhone application available on the <a href="https://itunes.apple.com/za/app/legal-news-reader/id308291730?mt=8"> iTunes Store.</a> <em>Link valid as of 2015-04-10</em>.</p>
-			<p><em>National Law Journal</em> is a link to the iPhone application available on the <a href="https://itunes.apple.com/us/app/nlj/id661574567?mt=8"> iTunes Store.</a> <em>Link valid as of 2015-04-10</em>.</p>
-			<p><em>ISCOTUSNow</em> is a link to the iPhone application available on the <a href="https://itunes.apple.com/us/app/iscotusnow/id560979198?mt=8"> iTunes Store.</a> <em>Link valid as of 2015-04-10</em>.</p>
+		This list was based in-part on that compiled by <a href="https://www.suffolk.edu/law/library/19322.php" target="_blank">Suffolk University Law School</a>. Link good as of 2015-04-14.
+		<P><b>iPhone Applications</b></P>
+			<p><em>Bloomberg Law Reports</em> is a link to the iPhone application available on the <a href="https://itunes.apple.com/us/app/law-reports/id557548420?mt=8" target="_blank"> iTunes Store.</a> <em>Link valid as of 2015-04-10</em>.</p>		
+			<p><em>Fastcase</em> is a link to the iPhone application available on the <a href="https://itunes.apple.com/us/app/fastcase/id352470511?mt=8" target="_blank"> iTunes Store.</a> <em>Link valid as of 2015-04-10</em>.</p>
+			<p><em>HeinOnline</em> is a link to the iPhone application available on the <a href="https://itunes.apple.com/us/app/heinonline-2012/id466881844?mt=8/" target="_blank"> iTunes Store.</a> <em>Link valid as of 2015-04-10</em>.</p>
+			<p><em>Lexis Advance</em> is a link to the iPhone application available on the <a href="https://itunes.apple.com/us/app/lexis-advance-for-solos/id409136268?mt=8" target="_blank"> iTunes Store.</a> <em>Link valid as of 2015-04-10</em>.</p>
+			<p><em>OpenRegs</em> is a link to the iPhone application available on the <a href="https://itunes.apple.com/us/app/openregs/id331752432?mt=8" target="_blank"> iTunes Store.</a> <em>Link valid as of 2015-04-10</em>.</p>
+			<p><em>Social Science Research Network (SSRN)</em> is a link to the iPhone application available on the <a href="https://itunes.apple.com/us/app/issrn/id334702612?mt=8" target="_blank"> iTunes Store.</a> <em>Link valid as of 2015-04-10</em>.</p>
+			<p><em>WestlawNext</em> is a link to the iPhone application available on the <a href="https://itunes.apple.com/us/app/westlawnext/id380675076?mt=8" target="_blank"> iTunes Store.</a> <em>Link valid as of 2015-04-10</em>.</p>
+			<p><em>ABA Daily Journal News </em> is a link to the iPhone application available on the <a href="https://itunes.apple.com/us/app/aba-journal-for-iphone-ipad/id367064750?mt=8" target="_blank"> iTunes Store.</a> <em>Link valid as of 2015-04-10</em>.</p>
+			<p><em>The American Lawyer</em> is a link to the iPhone application available on the <a href="https://itunes.apple.com/app/the-american-lawyer/id398472628?mt=8" target="_blank"> iTunes Store.</a> <em>Link valid as of 2015-04-10</em>.</p>
+			<p><em>Legal Edge</em> is a link to the iPhone application available on the <a href="https://itunes.apple.com/app/legal-edge/id333365053?mt=8" target="_blank"> iTunes Store.</a> <em>Link valid as of 2015-04-10</em>.</p>
+			<p><em>National Law Journal</em> is a link to the iPhone application available on the <a href="https://itunes.apple.com/us/app/nlj/id661574567?mt=8" target="_blank"> iTunes Store.</a> <em>Link valid as of 2015-04-10</em>.</p>
+			<p><em>ISCOTUSNow</em> is a link to the iPhone application available on the <a href="https://itunes.apple.com/us/app/iscotusnow/id560979198?mt=8" target="_blank"> iTunes Store.</a> <em>Link valid as of 2015-04-10</em>.</p>
 		<b>Android Applications</b>
-			<p><em>dLaw</em> is a link to the Android application made available by <a href="https://play.google.com/store/apps/details?id=com.bigtwit.dlaw.main&feature=more_from_developer"> Google Play.</a> <em>Link valid as of 2015-04-10</em>.</p>		
-			<p><em>WestlawNext</em> is a link to the Android application made available by <a href="https://play.google.com/store/apps/details?id=com.trgr.next"> Google Play.</a> <em>Link valid as of 2015-04-10</em>.</p>
-			<p><em>The American Lawyer</em> is a link to the Android application made available by <a href="https://play.google.com/store/apps/details?id=com.texterity.android.AmericanLawyer&feature=search_result"> Google Play.</a> <em>Link valid as of 2015-04-10</em>.</p>
-			<p><em>ISCOTUSNow</em> is a link to the Android application made available by <a href="https://play.google.com/store/apps/details?id=com.oyez.scotusnow"> Google Play.</a> <em>Link valid as of 2015-04-10</em>.</p>
+			<p><em>dLaw</em> is a link to the Android application made available by <a href="https://play.google.com/store/apps/details?id=com.bigtwit.dlaw.main&feature=more_from_developer" target="_blank"> Google Play.</a> <em>Link valid as of 2015-04-10</em>.</p>		
+			<p><em>WestlawNext</em> is a link to the Android application made available by <a href="https://play.google.com/store/apps/details?id=com.trgr.next" target="_blank"> Google Play.</a> <em>Link valid as of 2015-04-10</em>.</p>
+			<p><em>The American Lawyer</em> is a link to the Android application made available by <a href="https://play.google.com/store/apps/details?id=com.texterity.android.AmericanLawyer&feature=search_result" target="_blank"> Google Play.</a> <em>Link valid as of 2015-04-10</em>.</p>
+			<p><em>ISCOTUSNow</em> is a link to the Android application made available by <a href="https://play.google.com/store/apps/details?id=com.oyez.scotusnow" target="_blank"> Google Play.</a> <em>Link valid as of 2015-04-10</em>.</p>
 		<p><b>Suggestions</b></p>
-		<p>I am always looking to improve the content presented here. If you have any suggestions, please let me know. </p>
+		<p>We are always looking to improve the content presented here. If you have any suggestions or concerns, please let us know by emailing the curator.</p>
 		<p><a href="mailto:incourt@davidcolarusso.com?subject=Glossaries and Keys" target="_top" data-role="button" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c" data-bitly-type="bitly_hover_card"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Email Curator</span></span></a></p>
 		<p><a href="#disclaim" data-role="button" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c" data-bitly-type="bitly_hover_card"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Disclaimer</span></span></a></p>
 	</div><!-- /content -->
 </div><!-- /#about_apps -->
-
-<!-- Start of first page: #about_massprac -->
-<div data-role="page" id="about_massprac">
-	<div data-role="header" data-position="fixed" data-theme="b">
-		<a href="#legal" data-rel="back" data-iconpos="notext" data-icon="arrow-d"  data-transition="slideup" data-direction="reverse"></a>
-		<h1>About</h1>
-	</div>
-	<div id="about_v" data-role="content" style="text-align:left;">	
-		<b>Mass. Crim. Practice</b>
-		<p>This section contains links to chapters 1 through 50 of <a href="http://www.law.suffolk.edu/MCP/">Massachusetts Criminal Practice</a> edited by <a href="http://www.law.suffolk.edu/faculty/directories/faculty.cfm?InstructorID=7">Eric Blumenson</a> and <a href="http://www1.law.wne.edu/faculty/index.cfm?selection=doc.9735&uid=227">Arthur Leavens</a>. <em>Links valid as of 2012-12-02</em></p>
-		<p><b>Suggestions</b></p>
-		<p>I am always looking to improve the content presented here. If you have any suggestions, please let me know. </p>
-		<p><a href="mailto:incourt@davidcolarusso.com?subject=Offense-Specific Resources" target="_top" data-role="button" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c" data-bitly-type="bitly_hover_card"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Email Curator</span></span></a></p>
-		<p><a href="#disclaim" data-role="button" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c" data-bitly-type="bitly_hover_card"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Disclaimer</span></span></a></p>
-	</div><!-- /content -->
-</div><!-- /#about_massprac -->
-
 
 <!-- Start of first page: #about_master -->
 <div data-role="page" id="about_master">
@@ -1596,25 +1604,41 @@ New Bedford, Orleans, Plymouth, Wareham.</p></a></li>
 	<div id="about_v" data-role="content" style="text-align:left;">	
 		<b>Master Crime List</b>
 		<p>This page was adapted from public domain information, namely the Excel version of the "Felony and Misdemeanor Master Crime List of the Massachusetts Sentencing Commission" found on the Massachusetts Court's <a href="http://www.mass.gov/courts/admin/sentcomm.html" target="_source">Sentencing Commission page</a>. <em>Updated 2012-09-09</em>.</p>
-			<p><b>Suggestions</b></p>
-		<p>I am always looking to improve the content presented here. If you have any suggestions, please let me know. </p>
+		<p><b>Suggestions</b></p>
+		<p>We are always looking to improve the content presented here. If you have any suggestions or concerns, please let us know by emailing the curator.</p>
 		<p><a href="mailto:incourt@davidcolarusso.com?subject=Disposition Codes" target="_top" data-role="button" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c" data-bitly-type="bitly_hover_card"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Email Curator</span></span></a></p>
 		<p><a href="#disclaim" data-role="button" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c" data-bitly-type="bitly_hover_card"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Disclaimer</span></span></a></p>
 	</div><!-- /content -->
 </div><!-- /#about_master -->
 
-<!-- Start of first page: #about_dir -->
-<div data-role="page" id="about_sentgloss">
+<!-- Start of first page: #disclaim -->
+<div data-role="page" id="disclaim">
 	<div data-role="header" data-position="fixed" data-theme="b">
-		<a href="#sentgloss" data-rel="back" data-iconpos="notext" data-icon="arrow-d"  data-transition="slideup" data-direction="reverse"></a>
-		<h1>About</h1>
+		<a href="#home" data-rel="back" data-iconpos="notext" data-icon="arrow-l"  data-transition="slideup" data-direction="reverse"></a>
+		<h1>Disclaimer</h1>
+	</div>
+	<div id="about_v" data-role="content" style="text-align:left;">
+		<b>NO legal advice here.</b> Nothing posted under <em>ma-defenders.github.io/incourt</em> "The Site" should be construed as legal advice nor does any content provided here, or ones interactions with that content, create an attorney-client relationship. It should be noted that the authors of The Site make no assurances or warranties of any kind, expressed or implied, as to the accuracy, completeness, or reliability of content contained on The Site or on sites to which it links. The Site is offered as a public service. The Site is offered AS IS, and your use of it is strictly at your own risk. 
+	</div><!-- /content -->
+</div><!-- /#info -->
+
+<!-- Start of first page: #tos_test -->
+<div data-role="page" id="tos_test">
+	<div data-role="header" data-position="fixed" data-theme="b">
+		<h1>Terms of Service</h1>
 	</div>
 	<div id="about_v" data-role="content" style="text-align:left;">	
-		<b>GLOSSARY OF MASSACHUSETTS SENTENCING TERMS</b>
-		<p>Version 4.13</p><p>&copy; 2012 Lee J. Gartenberg</p>
-		<p><a href="#disclaim" data-role="button" data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-theme="c" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c" data-bitly-type="bitly_hover_card"><span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text">Disclaimer</span></span></a></p>
+				<b>NO legal advice here.</b> Nothing posted under <em>ma-defenders.github.io/incourt</em> "The Site" should be construed as legal advice nor does any content provided here, or ones interactions with that content, create an attorney-client relationship. It should be noted that the authors of The Site make no assurances or warranties of any kind, expressed or implied, as to the accuracy, completeness, or reliability of content contained on The Site or on sites to which it links. The Site is offered as a public service. The Site is offered AS IS, and your use of it is strictly at your own risk. 
+			<p>
+				Tap/click "I Agree" to indicate that you have read the above and agree to use The Site under these terms.
+			</p>
+		<table width=100%><tr><td align=center>
+		<a href="#home" onclick="createCookie('tos',1,36500);" data-role="button" data-theme="c" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c" style="width:150px">I Agree</a>		
+		</td><td align=center valign=top>
+		<a href="http://www.publiccounsel.net" data-role="button" data-theme="c" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c" style="width:100px">I Decline</a>
+		</td></tr></table>
 	</div><!-- /content -->
-</div><!-- /#about_dir -->
+</div><!-- /#tos_test -->
 
 </body>
 </html>
