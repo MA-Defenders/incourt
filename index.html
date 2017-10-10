@@ -143,14 +143,29 @@
 		      }).then(function() {
 		        // 3. Initialize and make the API request.
 		        return gapi.client.request({
-		          'path': 'https://sheets.googleapis.com/v4/spreadsheets/1_9Dsm5fSX2P8vzKlY3Y9jjwkxsFYzpIi9FLMTe6XNtc/values/data!A:A',
+		          'path': 'https://sheets.googleapis.com/v4/spreadsheets/1_9Dsm5fSX2P8vzKlY3Y9jjwkxsFYzpIi9FLMTe6XNtc/values/data!A1:E12',
 		        })
 		      }).then(function(response) {
+						console.log(response.result.values);
+						var index_to_add_after = 6;
 						for(var i=0; i < response.result.values.length; i++){
-							var index_to_add_after = 6+i;
-							$('#duty-day-resources-list li:eq('+index_to_add_after.toString()+')').after('<li class="ui-li-static ui-body-inherit">'+response.result.values[i][0]+'</li>');
+							$('#duty-day-resources-list li:eq('+index_to_add_after.toString()+')').after('<li>'
+							+'<a href="'+response.result.values[i][1]+'" target="" class="ui-btn ui-btn-icon-right ui-icon-carat-r">'
+							+response.result.values[i][0]+'</a><p class="ui-li-aside">'
+							+response.result.values[i][2]+'</p></li>');
 							sectionList = response.result.values;
-							//console.log(response.result.values[i][0]);
+							index_to_add_after = index_to_add_after + 1;
+						}
+						$('#duty-day-resources-list li:eq('+index_to_add_after.toString()+')').after('<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-b">Rules</li>');
+						index_to_add_after = index_to_add_after + 1;
+						for(var i=0; i < response.result.values.length; i++){
+							console.log('value: ', response.result.values[i].length);
+							if (response.result.values[i].length === 5){
+								$('#duty-day-resources-list li:eq('+index_to_add_after.toString()+')').after('<li>'
+								+'<a href="'+response.result.values[i][1]+'" target="" class="ui-btn ui-btn-icon-right ui-icon-carat-r">'
+								+response.result.values[i][4]+'</a></li>');
+								index_to_add_after = index_to_add_after + 1;
+							}
 						}
 		      }, function(reason) {
 		        console.log('Error: ' + reason.result.error.message);
@@ -159,11 +174,6 @@
 		    // 1. Load the JavaScript client library.
 		    gapi.load('client', start)
 		    </script>
-				<li><a href="http://m.malegislature.gov/Laws/GeneralLaws/PartIV/TitleII/Chapter277/Section70c" target="">Convert to Civil<p class="ui-li-aside">ch 277 &sect;70C</p></a></li>
-				<li data-role="list-divider">Rules</li>
-				<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/sjc/sjc310.html" target="">Indigency<p class="ui-li-aside">SJC R 3:10</p></a></li>
-				<li><a href="#crimpro">Rules of Criminal Procedure</a></li>
-				<li><a href="#vop">Dist. Ct. VOP Proceedings</a></li>
 		</ul>
  	</div><!-- /content -->
 </div><!-- /#duty -->
