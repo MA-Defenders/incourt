@@ -147,7 +147,9 @@
 		        })
 		      }).then(function(response) {
 						console.log(response.result.values);
-						var index_to_add_after = 6;
+						var index_to_add_after = 5;
+						$('#duty-day-resources-list li:eq('+index_to_add_after.toString()+')').after('<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-b">Statues</li>');
+						index_to_add_after = index_to_add_after + 1;
 						for(var i=0; i < response.result.values.length; i++){
 							$('#duty-day-resources-list li:eq('+index_to_add_after.toString()+')').after('<li>'
 							+'<a href="'+response.result.values[i][1]+'" target="" class="ui-btn ui-btn-icon-right ui-icon-carat-r">'
@@ -187,7 +189,55 @@
 		<a href="#about_rules" data-iconpos="notext" data-theme="c" data-icon="info" data-transition="slideup"></a>
 	</div>
 	<div id="rules_body" data-role="content" style="text-align:left;">
-			<ul data-role="listview" data-filter="true" data-filter-placeholder="Search Titles..." data-filter-theme="c" data-theme="c" data-divider-theme="b" >
+			<ul id="rules-body-list" data-role="listview" data-filter="true" data-filter-placeholder="Search Titles..." data-filter-theme="c" data-theme="c" data-divider-theme="b" >
+
+				<script>
+				var sectionList = [];
+		    function start() {
+		      // 2. Initialize the JavaScript client library.
+		      gapi.client.init({
+		        'apiKey': 'AIzaSyB_ozcqHgw1UJoqI4bEm8Fgr3HdK2qhpyo',
+		      }).then(function() {
+		        // 3. Initialize and make the API request.
+		        return gapi.client.request({
+		          'path': 'https://sheets.googleapis.com/v4/spreadsheets/1_9Dsm5fSX2P8vzKlY3Y9jjwkxsFYzpIi9FLMTe6XNtc/values/Statues_Cases_Rules!A1:G9?majorDimension=COLUMNS',
+		        })
+		      }).then(function(response) {
+						console.log(response.result.values);
+						console.log('testing');
+						$('#rules-body-list').prepend('<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-b">'+response.result.values[0][0]+'</li>');
+						var index_to_add_after = 0;
+						for(var i=0; i < response.result.values[0].length; i++){
+							console.log('for loop iteration');
+							$('#rules-body-list li:eq('+index_to_add_after.toString()+')').after('<li>'
+							+'<a href="test_link" target="" class="ui-btn ui-btn-icon-right ui-icon-carat-r">'+response.result.values[0][i]+'</a><p class="ui-li-aside">'
+							+'test_value</p></li>');
+							index_to_add_after = index_to_add_after + 1;
+						}
+						// 	+response.result.values[i][0]+'</a><p class="ui-li-aside">'
+						// 	+response.result.values[i][2]+'</p></li>');
+						// 	sectionList = response.result.values;
+						// 	index_to_add_after = index_to_add_after + 1;
+						// }
+						// $('#duty-day-resources-list li:eq('+index_to_add_after.toString()+')').after('<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-b">Rules</li>');
+						// index_to_add_after = index_to_add_after + 1;
+						// for(var i=0; i < response.result.values.length; i++){
+						// 	console.log('value: ', response.result.values[i].length);
+						// 	if (response.result.values[i].length === 5){
+						// 		$('#duty-day-resources-list li:eq('+index_to_add_after.toString()+')').after('<li>'
+						// 		+'<a href="'+response.result.values[i][1]+'" target="" class="ui-btn ui-btn-icon-right ui-icon-carat-r">'
+						// 		+response.result.values[i][4]+'</a></li>');
+						// 		index_to_add_after = index_to_add_after + 1;
+						// 	}
+						// }
+		      }, function(reason) {
+		        console.log('Error: ' + reason.result.error.message);
+		      });
+		    };
+		    // 1. Load the JavaScript client library.
+		    gapi.load('client', start)
+		    </script>
+
 				<li data-role="list-divider">Guides</li>
 				<li><a href="http://www.mass.gov/courts/case-legal-res/guidelines/mass-guide-to-evidence/">Guide to Evidence</a></li>
 				<li class="crim"><a href="#jury">Model Jury Instructions</a></li>
