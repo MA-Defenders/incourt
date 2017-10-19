@@ -200,36 +200,52 @@
 		      }).then(function() {
 		        // 3. Initialize and make the API request.
 		        return gapi.client.request({
-		          'path': 'https://sheets.googleapis.com/v4/spreadsheets/1_9Dsm5fSX2P8vzKlY3Y9jjwkxsFYzpIi9FLMTe6XNtc/values/Statues_Cases_Rules!A1:G9?majorDimension=COLUMNS',
+		          'path': 'https://sheets.googleapis.com/v4/spreadsheets/1_9Dsm5fSX2P8vzKlY3Y9jjwkxsFYzpIi9FLMTe6XNtc/values/Statues_Cases_Rules!A1:H9?majorDimension=COLUMNS',
 		        })
 		      }).then(function(response) {
 						console.log(response.result.values);
 						console.log('testing');
 						$('#rules-body-list').prepend('<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-b">'+response.result.values[0][0]+'</li>');
 						var index_to_add_after = 0;
-						for(var i=0; i < response.result.values[0].length; i++){
+						for(var i=1; i < response.result.values[0].length; i++){
 							console.log('for loop iteration');
 							$('#rules-body-list li:eq('+index_to_add_after.toString()+')').after('<li>'
-							+'<a href="test_link" target="" class="ui-btn ui-btn-icon-right ui-icon-carat-r">'+response.result.values[0][i]+'</a><p class="ui-li-aside">'
-							+'test_value</p></li>');
+							+'<a href="' + response.result.values[1][i] + '" target="" class="ui-btn ui-btn-icon-right ui-icon-carat-r">'+response.result.values[0][i]+'</a></li>');
 							index_to_add_after = index_to_add_after + 1;
 						}
-						// 	+response.result.values[i][0]+'</a><p class="ui-li-aside">'
-						// 	+response.result.values[i][2]+'</p></li>');
-						// 	sectionList = response.result.values;
-						// 	index_to_add_after = index_to_add_after + 1;
-						// }
-						// $('#duty-day-resources-list li:eq('+index_to_add_after.toString()+')').after('<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-b">Rules</li>');
-						// index_to_add_after = index_to_add_after + 1;
-						// for(var i=0; i < response.result.values.length; i++){
-						// 	console.log('value: ', response.result.values[i].length);
-						// 	if (response.result.values[i].length === 5){
-						// 		$('#duty-day-resources-list li:eq('+index_to_add_after.toString()+')').after('<li>'
-						// 		+'<a href="'+response.result.values[i][1]+'" target="" class="ui-btn ui-btn-icon-right ui-icon-carat-r">'
-						// 		+response.result.values[i][4]+'</a></li>');
-						// 		index_to_add_after = index_to_add_after + 1;
-						// 	}
-						// }
+
+						for(var i=0; i < response.result.values[2].length; i++){
+							if (i === 0){
+								$('#rules-body-list li:eq('+index_to_add_after.toString()+')').after('<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-b">'
+									+response.result.values[2][0]+'</li>');
+							} else {
+								$('#rules-body-list li:eq('+index_to_add_after.toString()+')').after('<li>'
+								+'<a href="' + response.result.values[3][i] + '" target="" class="ui-btn ui-btn-icon-right ui-icon-carat-r">'+response.result.values[2][i]+'</a></li>');
+							}
+							index_to_add_after = index_to_add_after + 1;
+						}
+
+						for(var i=0; i < response.result.values[4].length; i++){
+							if (i === 0){
+								$('#rules-body-list li:eq('+index_to_add_after.toString()+')').after('<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-b">'
+									+response.result.values[4][0]+'</li>');
+							} else {
+								$('#rules-body-list li:eq('+index_to_add_after.toString()+')').after('<li>'
+								+'<a href="' + response.result.values[5][i] + '" target="" class="ui-btn ui-btn-icon-right ui-icon-carat-r">'+response.result.values[4][i]+'</a></li>');
+							}
+							index_to_add_after = index_to_add_after + 1;
+						}
+
+						for(var i=0; i < response.result.values[6].length; i++){
+							if (i === 0){
+								$('#rules-body-list li:eq('+index_to_add_after.toString()+')').after('<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-b">'
+									+response.result.values[6][0]+'</li>');
+							} else {
+								$('#rules-body-list li:eq('+index_to_add_after.toString()+')').after('<li>'
+								+'<a href="' + response.result.values[7][i] + '" target="" class="ui-btn ui-btn-icon-right ui-icon-carat-r">'+response.result.values[6][i]+'</a></li>');
+							}
+							index_to_add_after = index_to_add_after + 1;
+						}
 		      }, function(reason) {
 		        console.log('Error: ' + reason.result.error.message);
 		      });
@@ -237,29 +253,6 @@
 		    // 1. Load the JavaScript client library.
 		    gapi.load('client', start)
 		    </script>
-
-				<li data-role="list-divider">Guides</li>
-				<li><a href="http://www.mass.gov/courts/case-legal-res/guidelines/mass-guide-to-evidence/">Guide to Evidence</a></li>
-				<li class="crim"><a href="#jury">Model Jury Instructions</a></li>
-				<li data-role="list-divider">Rules</li>
-				<li class="crim"><a href="#crimpro">Rules of Criminal Procedure</a></li>
-				<li class="civ"><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/civil-procedure/">Rules of Civil Procedure</a></li>
-				<li><a href="#rpc">Rules of Professional Conduct</a></li>
-				<li class="crim"><a href="#vop">Dist. Ct. VOP Proceedings</a></li>
-				<li data-role="list-divider">Statutes</li>
-				<li class="crim"><a href="https://malegislature.gov/Laws/GeneralLaws/PartIV" rel="external">Part IV, Title I (crimes)</a></li>
-				<li><a href=https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXVII/Chapter123 rel="external">Chapter 123 (Mental Health)</a></li>
-				<li class="civ"><a href=https://malegislature.gov/Laws/GeneralLaws/PartI/TitleXVII/Chapter119 rel="external">Chapter 119 (Care &amp; Protection)</a></li>
-				<li><a href="https://malegislature.gov/Laws/GeneralLaws/Search/" rel="external">General Laws</a></li>
-				<li><a href="https://malegislature.gov/laws/constitution">MA Constitution</a></li>
-				<li><a href="http://www.archives.gov/exhibits/charters/print_friendly.html?page=constitution_transcript_content.html&title=The%20Constitution%20of%20the%20United%20States%3A%20A%20Transcription">US Constitution</a></li>
-				<li><a href="http://www.archives.gov/exhibits/charters/print_friendly.html?page=bill_of_rights_transcript_content.html&title=The%20Bill%20of%20Rights%3A%20A%20Transcription">Bill of Rights</a></li>
-				<li><a href="http://www.archives.gov/exhibits/charters/print_friendly.html?page=constitution_amendments_11-27_content.html&title=The%20Constitution%20of%20the%20United%20States%3A%20Amendments%2011-27">US Const. Amendments 11-27</a></li>
-				<li data-role="list-divider">Search Tools</li>
-				<li><a href="http://scholar.google.com/scholar?hl=en&as_sdt=4,22" rel="external">Google Scholar (MA)</a></li>
-				<li><a href="http://scholar.google.com/scholar?hl=en&as_sdt=3" rel="external">Google Scholar (Federal)</a></li>
-				<li><a href="http://scholar.google.com/scholar?hl=en&as_sdt=1ffffffffffffffffffffffffffffffffe000000000000001f000001ffffffecfff87fe3fffffff00108000000040000004" rel="external">Google Scholar (MA &amp; Federal)</a></li>
-				<li><a href="https://casetext.com/">Casetext (cases &amp; statutes)</a></li>
 			</ul>
  		</div><!-- /content -->
 </div><!-- /#home -->
