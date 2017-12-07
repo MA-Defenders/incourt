@@ -321,13 +321,37 @@
 		<a href="#about_gloss" data-iconpos="notext" data-theme="c" data-icon="info" data-transition="slideup"></a>
 	</div>
 	<div id="gloss_body" data-role="content" style="text-align:left;">
-		<ul data-role="listview" data-filter="true" data-filter-placeholder="Search Titles..." data-filter-theme="c" data-theme="c" data-divider-theme="b">
-				<li><a href="#assign">Judicial Assignments</a></li>
-				<li><a href="#dispo">Disposition Codes</a></li>
-				<li class="crim"><a href="master.html" data-prefetch><h3>Master Crime List</h3><p><em>May be slow to load/navigate.</em></p></a></li>
-				<li class="crim"><a href="http://www.mass.gov/courts/court-info/trial-court/sent-commission/criminal-history-groups-ma-sentencing-guidelines-gen.html">Criminal History Groups</a></li>
-				<li class="crim"><a href="http://www.mass.gov/courts/court-info/trial-court/sent-commission/ma-sentencing-grid-gen.html">Sentencing Guidelines Grid</a></li>
-				<li class="crim"><a href="https://www.publiccounsel.net/ya/wp-content/uploads/sites/6/2015/02/DYS2012Grid.pdf">DYS Sentencing Grid</a></li>
+		<ul id="table-lists-and-glossaries-list" data-role="listview" data-filter="true" data-filter-placeholder="Search Titles..." data-filter-theme="c" data-theme="c" data-divider-theme="b">
+
+			<script>
+			var sectionList = [];
+			function start() {
+				// 2. Initialize the JavaScript client library.
+				gapi.client.init({
+					'apiKey': 'AIzaSyB_ozcqHgw1UJoqI4bEm8Fgr3HdK2qhpyo',
+				}).then(function() {
+					// 3. Initialize and make the API request.
+					return gapi.client.request({
+						'path': 'https://sheets.googleapis.com/v4/spreadsheets/1_9Dsm5fSX2P8vzKlY3Y9jjwkxsFYzpIi9FLMTe6XNtc/values/Tables_Lists_and_Glossaries!A1:B6?majorDimension=COLUMNS',
+					})
+				}).then(function(response) {
+					console.log(response.result.values);
+					$('#table-lists-and-glossaries-list').prepend('<li>'+'<a href="' + response.result.values[1][0] + '" target="" class="ui-btn ui-btn-icon-right ui-icon-carat-r"><h3>'
+						+response.result.values[0][0]+'</h3></a></li>');
+					var index_to_add_after = 0;
+					for(var i=1; i < response.result.values[0].length; i++){
+						$('#table-lists-and-glossaries-list li:eq('+index_to_add_after.toString()+')').after('<li>'
+						+'<a href="' + response.result.values[1][i] + '" target="" class="ui-btn ui-btn-icon-right ui-icon-carat-r"><h3>'+response.result.values[0][i]+'</h3></a></li>');
+						index_to_add_after = index_to_add_after + 1;
+					}
+
+				}, function(reason) {
+					console.log('Error: ' + reason.result.error.message);
+				});
+			};
+			// 1. Load the JavaScript client library.
+			gapi.load('client', start)
+			</script>
 		</ul>
  	</div><!-- /content -->
 </div><!-- /#gloss -->
