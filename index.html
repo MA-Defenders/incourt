@@ -335,14 +335,23 @@
 						'path': 'https://sheets.googleapis.com/v4/spreadsheets/1_9Dsm5fSX2P8vzKlY3Y9jjwkxsFYzpIi9FLMTe6XNtc/values/Tables_Lists_and_Glossaries!A1:B6?majorDimension=COLUMNS',
 					})
 				}).then(function(response) {
+					console.log('table lists section');
 					console.log(response.result.values);
 					$('#table-lists-and-glossaries-list').prepend('<li>'+'<a href="' + response.result.values[1][0] + '" target="" class="ui-btn ui-btn-icon-right ui-icon-carat-r"><h3>'
 						+response.result.values[0][0]+'</h3></a></li>');
 					var index_to_add_after = 0;
 					for(var i=1; i < response.result.values[0].length; i++){
-						$('#table-lists-and-glossaries-list li:eq('+index_to_add_after.toString()+')').after('<li>'
-						+'<a href="' + response.result.values[1][i] + '" target="" class="ui-btn ui-btn-icon-right ui-icon-carat-r"><h3>'+response.result.values[0][i]+'</h3></a></li>');
-						index_to_add_after = index_to_add_after + 1;
+						if (response.result.values[1][i] === 'master.html'){
+							$('#table-lists-and-glossaries-list li:eq('+index_to_add_after.toString()+')').after(
+								'<li><a href="master.html" data-prefetch class="ui-btn ui-btn-icon-right ui-icon-carat-r"><h3>Master Crime List</h3><p><em>May be slow to load/navigate.</em></p></a></li>'
+							);
+							index_to_add_after = index_to_add_after + 1;
+						}
+						else{
+							$('#table-lists-and-glossaries-list li:eq('+index_to_add_after.toString()+')').after('<li>'
+							+'<a href="' + response.result.values[1][i] + '" target="" class="ui-btn ui-btn-icon-right ui-icon-carat-r"><h3>'+response.result.values[0][i]+'</h3></a></li>');
+							index_to_add_after = index_to_add_after + 1;
+						}
 					}
 
 				}, function(reason) {
