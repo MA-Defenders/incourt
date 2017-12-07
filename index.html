@@ -276,7 +276,7 @@
 					}).then(function() {
 						// 3. Initialize and make the API request.
 						return gapi.client.request({
-							'path': 'https://sheets.googleapis.com/v4/spreadsheets/1_9Dsm5fSX2P8vzKlY3Y9jjwkxsFYzpIi9FLMTe6XNtc/values/Model_Jury_Instructions!A1:O26?majorDimension=COLUMNS',
+							'path': 'https://sheets.googleapis.com/v4/spreadsheets/1_9Dsm5fSX2P8vzKlY3Y9jjwkxsFYzpIi9FLMTe6XNtc/values/Model_Jury_Instructions!A1:CZ30?majorDimension=COLUMNS',
 						})
 					}).then(function(response) {
 						console.log(response.result.values);
@@ -288,37 +288,17 @@
 							index_to_add_after = index_to_add_after + 1;
 						}
 
-						for(var i=0; i < response.result.values[4].length; i++){
-							if (i === 0){
-								$('#model-jury-instructions-list li:eq('+index_to_add_after.toString()+')').after('<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-b">'
-									+response.result.values[4][0]+'</li>');
-							} else {
-								$('#model-jury-instructions-list li:eq('+index_to_add_after.toString()+')').after('<li>'
-								+'<a href="' + response.result.values[5][i] + '" target="" class="ui-btn ui-btn-icon-right ui-icon-carat-r"><h3>'+response.result.values[4][i]+'</h3><p>'+response.result.values[6][i]+'</p></a></li>');
+						for(var col_index=4; col_index < response.result.values.length; col_index=col_index+4){
+							for(var i=0; i < response.result.values[col_index].length; i++){
+								if (i === 0){
+									$('#model-jury-instructions-list li:eq('+index_to_add_after.toString()+')').after('<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-b">'
+										+response.result.values[col_index][0]+'</li>');
+								} else {
+									$('#model-jury-instructions-list li:eq('+index_to_add_after.toString()+')').after('<li>'
+									+'<a href="' + response.result.values[col_index+1][i] + '" target="" class="ui-btn ui-btn-icon-right ui-icon-carat-r"><h3>'+response.result.values[col_index][i]+'</h3><p>'+response.result.values[col_index+2][i]+'</p></a></li>');
+								}
+								index_to_add_after = index_to_add_after + 1;
 							}
-							index_to_add_after = index_to_add_after + 1;
-						}
-
-						for(var i=0; i < response.result.values[8].length; i++){
-							if (i === 0){
-								$('#model-jury-instructions-list li:eq('+index_to_add_after.toString()+')').after('<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-b">'
-									+response.result.values[8][0]+'</li>');
-							} else {
-								$('#model-jury-instructions-list li:eq('+index_to_add_after.toString()+')').after('<li>'
-								+'<a href="' + response.result.values[9][i] + '" target="" class="ui-btn ui-btn-icon-right ui-icon-carat-r"><h3>'+response.result.values[8][i]+'</h3><p>'+response.result.values[10][i]+'</p></a></li>');
-							}
-							index_to_add_after = index_to_add_after + 1;
-						}
-
-						for(var i=0; i < response.result.values[12].length; i++){
-							if (i === 0){
-								$('#model-jury-instructions-list li:eq('+index_to_add_after.toString()+')').after('<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-b">'
-									+response.result.values[12][0]+'</li>');
-							} else {
-								$('#model-jury-instructions-list li:eq('+index_to_add_after.toString()+')').after('<li>'
-								+'<a href="' + response.result.values[13][i] + '" target="" class="ui-btn ui-btn-icon-right ui-icon-carat-r"><h3>'+response.result.values[12][i]+'</h3><p>'+response.result.values[14][i]+'</p></a></li>');
-							}
-							index_to_add_after = index_to_add_after + 1;
 						}
 
 					}, function(reason) {
@@ -328,158 +308,6 @@
 				// 1. Load the JavaScript client library.
 				gapi.load('client', start)
 				</script>
-				<li data-role="list-divider">Evaluation of Evidence</li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/3500-evidence-absent-witness.pdf"><h3>Absent Witness</h3><p>No. 3.500. Revised Jan 2009</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/3520-evidence-admission-by-silence.pdf"><h3>Admission by Silence</h3><p>No. 3.520. Revised 1988</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/3540-evidence-child-witness.pdf"><h3>Child Witness</h3><p>No. 3.540. Revised Jun 1995</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/3560-evidence-confessions-and-admissions-humane-practice.pdf"><h3>Confessions and Admissions (Humane Practice)</h3><p>No. 3.560. Revised Jun 2005</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/3580-evidence-consciousness-of-guilt.pdf"><h3>Consciousness of Guilt</h3><p>No. 3.580. Revised 1989</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/3600-evidence-defendant-does-not-testify.pdf"><h3>Defendant Does Not Testify</h3><p>No. 3.600. Revised Jan 2009</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/3620-evidence-excluded-question-stricken-evidence.pdf"><h3>Excluded Question; Stricken Evidence</h3><p>No. 3.620. Revised 1988</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/3640-evidence-expert-witness.pdf"><h3>Expert Witness</h3><p>No. 3.640. Revised Jan 2009</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/3660-evidence-first-complaint.pdf"><h3>First Complaint</h3><p>No. 3.660. Revised Oct 2005</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/3680-evidence-impeachment-by-prior-conviction.pdf"><h3>Impeachment by Prior Conviction of a Crime (G.L. c. 233, § 21)</h3><p>No. 3.680. Revised 1988</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/3700-evidence-impeachment-by-prior-inconsistent-statement.pdf"><h3>Impeachment by Prior Inconsistent Statement; Rehabilitation by Prior Consistent Statement</h3><p>No. 3.700. Revised 1989</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/3720-evidence-mug-shots.pdf"><h3>Mug Shots</h3><p>No. 3.720. Revised 1988</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/3740-evidence-omissions-in-police-investigations.pdf"><h3>Omissions in Police Investigations</h3><p>No. 3.740. Revised Jun 2005</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/3760-evidence-other-bad-acts-by-defendant.pdf"><h3>Other Bad Acts by Defendant</h3><p>No. 3.760. Revised 1988</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/3780-evidence-prior-trial.pdf"><h3>Prior Trial</h3><p>No. 3.780. Revised 1988</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/3800-evidence-reputation-of-defendant.pdf"><h3>Reputation of Defendant</h3><p>No. 3.800. Revised 1989</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/3820-evidence-unrecorded-custodial-interrogation.pdf"><h3>Unrecorded Custodial Interrogation</h3><p>No. 3.820. Revised Jun 2005</p></a></li>
-				<li data-role="list-divider">Offenses, General</li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/4100-accessory-before-the-fact.pdf"><h3>Accessory Before the Fact (G.L. c. 274, § 2)</h3><p>No. 4.100. Revised 1988</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/4120-attempt.pdf"><h3>Attempt (G.L. c. 274, § 6)</h3><p>No. 4.120. Revised 1988</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/4140-compounding-or-concealing-a-felony.pdf"><h3>Compounding or Concealing a Felony (G.L. c. 268, § 36)</h3><p>No. 4.140. Revised 1988</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/4160-conspiracy.pdf"><h3>Conspiracy (G.L. c. 274, § 7)</h3><p>No. 4.160. Revised 1989</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/4180-corporate-criminal-responsibility.pdf"><h3>Corporate Criminal Responsibility</h3><p>No. 4.180. Revised 1988</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/4200-aiding-or-abetting.pdf"><h3>Aiding or Abetting</h3><p>No. 4.200. Revised May 2011</p></a></li>
-				<li data-role="list-divider">Motor Vehicle Offenses</li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/5100-attaching-wrong-plates-to-conceal-identity.pdf"><h3>Attaching Wrong Plates to Conceal Identity (G.L. c. 90, § 23)</h3><p>No. 5.100. Revised 1988</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/5120-false-statement-in-license-application.pdf"><h3>False Statement in License Application (G.L. c. 90, § 24 [2][a])</h3><p>No. 5.120. Revised 1988</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/5140-homicide-by-a-motor-vehicle-felony.pdf"><h3>Homicide by a Motor Vehicle (Felony) (G.L. c. 90, § 24G [a])</h3><p>No. 5.140. Revised Jan 2009</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/5160-homicide-by-a-motor-vehicle-misdemeanor.pdf"><h3>Homicide by a Motor Vehicle (Misdemeanor) (G.L. c. 90, § 24G [b])</h3><p>No. 5.160. Revised Jan 2009</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/5180-leaving-the-scene-of-an-accident.pdf"><h3>Leaving the Scene of an Accident (G.L. c. 90, §§ 24 [2][a] or [a½])</h3><p>No. 5.180. Revised May 2011</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/5200-operating-after-suspension-or-revocation.pdf"><h3>Operating After Suspension or Revocation of License (G.L. c. 90, § 23)</h3><p>No. 5.200. Revised 1989</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/5220-operating-an-uninsured-motor-vehicle.pdf"><h3>Operating an Uninsured Motor Vehicle (G.L. c. 90, § 34J)</h3><p>No. 5.220. Revised Jan 2009</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/5240-operating-negligently.pdf"><h3>Operating Negligently So As to Endanger (G.L. c. 90, § 24 [2][a])</h3><p>No. 5.240. Revised Jan 2009</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/5260-operating-recklessly.pdf"><h3>Operating Recklessly (G.L. c. 90, § 24 [2][a])</h3><p>No. 5.260. Revised Jan 2009</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/5300-oui-liquor-or-08-percent-blood-alcohol.pdf"><h3>Operating Under the Influence of Liquor or with .08% Blood Alcohol (G.L. c. 90, § 24 [1])</h3><p>No. 5.300. Revised May 2011</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/5301-oui-liquor-or-08-percent-blood-alcohol-verdict-slip.pdf"><h3>[Verdict Slip] Operating Under the Influence of Liquor or with .08% Blood Alcohol (G.L. c. 90, § 24 [1])</h3><p>No. 5.301. Revised Jun 2008</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/5400-oui-drugs.pdf"><h3>Operating Under the Influence of Drugs (G.L. c. 90, § 24 [1])</h3><p>No. 5.400. Revised 1989</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/5500-oui-causing-serious-injury.pdf"><h3>Operating Under the Influence Causing Serious Injury (G.L. c. 90, § 24L)</h3><p>No. 5.500. Revised 1988</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/5501-oui-causing-serious-injury-verdict-slip.pdf"><h3>[Verdict Slip] Operating Under the Influence Causing Serious Injury (G.L. c. 90, § 24L)</h3><p>No. 5.501. Revised 1988</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/5600-operating-without-being-licensed.pdf"><h3>Operating Without Being Licensed (G.L. c. 90, § 10)</h3><p>No. 5.600. Revised 1988</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/5620-refusal-to-obey-police-officer.pdf"><h3>Refusal to Obey Police Officer (G.L. c. 90, § 25)</h3><p>No. 5.620. Revised 1988</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/5640-road-racing.pdf"><h3>Road Racing (G.L. c. 90, § 24 [2][a])</h3><p>No. 5.640. Revised 1988</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/5660-use-of-vehicle-without-authority.pdf"><h3>Use of Vehicle Without Authority (G.L. c. 90, § 24 [2][a])</h3><p>No. 5.660. Revised 1988</p></a></li>
-				<li data-role="list-divider">Offenses Against the Person</li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/6100-affray.pdf"><h3>Affray (G.L. c. 277, § 39)</h3><p>No. 6.100. Revised 1988</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/6120-assault.pdf"><h3>Assault (G.L. c. 265, § 13A[a])</h3><p>No. 6.120. Revised Jul 1997</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/6121-assault-verdict-slip.pdf"><h3>[Verdict Slip] Assault (G.L. c. 265, § 13A[a])</h3><p>No. 6.121. Revised May 2011</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/6140-assault-and-battery.pdf"><h3>Assault and Battery (G.L. c. 265, § 13A [a])</h3><p>No. 6.140. Revised Jul 1997</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/6141-assault-and-battery-verdict-slip.pdf"><h3>[Verdict Slip] Assault and Battery (G.L. c. 265, § 13A [a])</h3><p>No. 6.141. Revised Jul 1997</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/6160-assault-and-battery-causing-serious-injury.pdf"><h3>Assault and Battery Causing Serious Injury (G.L. c. 265, § 13A [b][i])</h3><p>No. 6.160. Revised Jun 2005</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/6180-assault-and-battery-on-person-protected-by-abuse-prevention-order.pdf"><h3>Assault and Battery on a Person Protected by an Abuse Prevention Order (G.L. c. 265, § 13A [b][iii])</h3><p>No. 6.180. Revised Jun 2005</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/6200-assault-and-battery-on-a-pregnant-woman.pdf"><h3>Assault and Battery on a Pregnant Woman (G.L. c. 265, § 13A [b][ii])</h3><p>No. 6.200. Revised Jun 2005</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/6210-assault-and-battery-on-police-officer-or-public-employee.pdf"><h3>Assault and Battery on a Police Officer or Public Employee (G.L. c. 265, § 13D)</h3><p>No. 6.210. Revised May 2011</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/6220-assault-and-battery-on-child-under-14-causing-bodily-injury.pdf"><h3>Assault and Battery on a Child under 14 Causing Bodily Injury (G.L. c. 265, § 13J [b][par. 1])</h3><p>No. 6.220. Revised May 2011</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/6230-wantonly-or-recklessly-permitting-bodily-injury-to-a-child-under-14.pdf"><h3>Wantonly or Recklessly Permitting Bodily Injury to a Child under 14 (G.L. c. 265, § 13J [b][par. 3][first part])</h3><p>No. 6.230. Revised May 2011</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/6240-wantonly-or-recklessly-permitting-another-to-commit-an-assault-and-battery-on-a-child-under-14-causing-bodily-injury.pdf"><h3>Wantonly or Recklessly Permitting Another to Commit an Assault and Battery on a Child under 14 Causing Bodily Injury (G.L. c. 265, § 13J [b][par. 3][second part])</h3><p>No. 6.240. Revised May 2011</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/6250-wantonly-or-recklessly-permitting-substantial-bodily-injury-to-a-child-under-14.pdf"><h3>Wantonly or Recklessly Permitting Substantial Bodily Injury to a Child under 14 (G.L. c. 265, § 13J [b][par. 4][first part])</h3><p>No. 6.250. Revised May 2011</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/6260-wantonly-or-recklessly-permitting-another-to-commit-and-assault.pdf"><h3>Wantonly or Recklessly Permitting Another to Commit an Assault and Battery on a Child under 14 Causing Substantial Bodily Injury (G.L. c. 265, § 13J [b][par. 4][second part])</h3><p>No. 6.260. Revised May 2011</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/6300-assault-and-battery-by-means-of-a-dangerous-weapon.pdf"><h3>Assault and Battery by Means of a Dangerous Weapon (G.L. c. 265, § 15A[b])</h3><p>No. 6.300. Revised Jul 1997</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/6301-assault-and-battery-by-means-of-a-dangerous-weapon-verdict-slip.pdf"><h3>[Verdict Slip] Assault and Battery by Means of a Dangerous Weapon (G.L. c. 265, § 15A[b])</h3><p>No. 6.301. Revised Jul 1997</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/6320-abdw-causing-serious-injury.pdf"><h3>ABDW Causing Serious Injury (G.L. c. 265, § 15A [c][i])</h3><p>No. 6.320. Revised Jun 2005</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/6340-abdw-on-child-under-14.pdf"><h3>ABDW on a Child under 14 (G.L. c. 265, § 15A [c][iv])</h3><p>No. 6.340. Revised Jun 2005</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/6360-abdw-on-person-protected-by-abuse-prevention-order.pdf"><h3>ABDW on a Person Protected by an Abuse Prevention Order (G.L. c. 265, § 15A [c][iii])</h3><p>No. 6.360. Revised Jun 2005</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/6380-abdw-on-pregnant-woman.pdf"><h3>ABDW on a Pregnant Woman (G.L. c. 265, § 15A [c][ii])</h3><p>No. 6.380. Revised Jun 2005</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/6400-custodial-interference-by-relative.pdf"><h3>Custodial Interference by Relative (G.L. c. 265, § 26A)</h3><p>No. 6.400. Revised 1988</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/6500-indecent-assault-and-battery.pdf"><h3>Indecent Assault and Battery (G.L. c. 265, § 13H)</h3><p>No. 6.500. Revised Jan 2009</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/6520-indecent-assault-and-battery-on-child-under-14.pdf"><h3>Indecent Assault and Battery on a Child Under Fourteen (G.L. c. 265, § 13B)</h3><p>No. 6.520. Revised Jun 1995</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/6540-reckless-endangerment-of-child-under18.pdf"><h3>Reckless Endangerment of a Child under 18 (G.L. c. 265, § 13L)</h3><p>No. 6.540. Revised May 2011</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/6560-enticing-a-child-under16.pdf"><h3>Enticing a Child under 16 (G.L. c. 265, § 26C)</h3><p>No. 6.560. Revised May 2011</p></a></li>
-				<li data-role="list-divider">Abuse-Related Offenses</li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/6600-annoying-and-accosting-persons-of-opposite-sex.pdf"><h3>Annoying and Accosting Persons of the Opposite Sex (G.L. c. 272, § 53)</h3><p>No. 6.600. Revised Mar 2007</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/6620-civil-rights-violations.pdf"><h3>Civil Rights Violations (G.L. c. 265, § 37)</h3><p>No. 6.620. Revised Jun 1995</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/6640-criminal-harassment.pdf"><h3>Criminal Harassment (G.L. c. 265, § 43A)</h3><p>No. 6.640. Revised May 2011</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/6660-harassing-or-obscene-telephone-calls.pdf"><h3>Harassing or Obscene Telephone Calls (G.L. c. 269, § 14A)</h3><p>No. 6.660. Revised May 2011</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/6680-stalking.pdf"><h3>Stalking (G.L. c. 265, § 43)</h3><p>No. 6.680. Revised May 2011</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/6700-threat-to-commit-crime.pdf"><h3>Threat to Commit Crime (G.L. c. 275, §§ 2-4)</h3><p>No. 6.700. Revised Jan 2009</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/6720-violation-of-abuse-prevention-order.pdf"><h3>Violation of an Abuse Prevention Order (G.L. c. 209A, § 7)</h3><p>No. 6.720. Revised May 2011</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/6740-violation-of-harassment-prevention-order.pdf"><h3>Violation of a Harassment Prevention Order (G.L. c. 258E, § 9)</h3><p>No. 6.740. Revised May 2011</p></a></li>
-				<li data-role="list-divider">Public Order Offenses</li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/7100-bail-jumping.pdf"><h3>Bail Jumping (G.L. c. 276, § 82A)</h3><p>No. 7.100. Revised 1989</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/7120-common-nightwalker.pdf"><h3>Common Nightwalker (G.L. c. 272, § 53)</h3><p>No. 7.120. Revised 1989</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/7140-deriving-support-from-earnings-of-a-prostitute.pdf"><h3>Deriving Support from Earnings of a Prostitute (G.L. c. 272, § 7)</h3><p>No. 7.140. Revised 1988</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/7160-disorderly-conduct.pdf"><h3>Disorderly Conduct (G.L. c. 272, § 53)</h3><p>No. 7.160. Revised 1989</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/7180-disseminating-obscene-matter.pdf"><h3>Disseminating Obscene Matter; Possession with Intent to Disseminate Obscene Matter (G.L. c. 272, § 29)</h3><p>No. 7.180. Revised 1988</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/7200-disturbing-the-peace.pdf"><h3>Disturbing the Peace (G.L. c. 272, § 53)</h3><p>No. 7.200. Revised 1988</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/7220-escape.pdf"><h3>Escape (G.L. c. 268, § 16)</h3><p>No. 7.220. Revised Jan 2009</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/7240-failing-to-register-as-a-sex-offender.pdf"><h3>Failing to Register as a Sex Offender (G.L. c. 6, § 178H)</h3><p>No. 7.240. Revised Jan 2009</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/7260-false-report-of-crime.pdf"><h3>False Report of a Crime (G.L. c. 269, § 13A)</h3><p>No. 7.260. Revised Jun 2006</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/7280-fighting-animals.pdf"><h3>Fighting Animals (G.L. c. 272, § 94)</h3><p>No. 7.280. Revised Jun 2005</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/7300-giving-false-name-upon-arrest.pdf"><h3>Giving False Name upon Arrest (G.L. c. 268, § 34A)</h3><p>No. 7.300. Revised Jan 2009</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/7320-illegal-lottery.pdf"><h3>Illegal Lottery (G.L. c. 271, § 7)</h3><p>No. 7.320. Revised Jan 2009</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/7340-indecent-exposure.pdf"><h3>Indecent Exposure (G.L. c. 272, § 53)</h3><p>No. 7.340. Revised Jan 2009</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/7360-intimidating-a-witness-etc.pdf"><h3>Intimidating a Witness, Juror, Court Official or Law Enforcement Officer (G.L. c. 268, § 13B)</h3><p>No. 7.360. Revised Feb 2008</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/7380-lewd-wanton-and-lascivious-act.pdf"><h3>Lewd, Wanton and Lascivious Act (G.L. c. 272, § 53)</h3><p>No. 7.380. Revised Jun 1995</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/7400-open-and-gross-lewdness-and-lascivious-behavior.pdf"><h3>Open and Gross Lewdness and Lascivious Behavior (G.L. c. 272, § 16)</h3><p>No. 7.400. Revised Jan 2009</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/7420-possession-of-fireworks.pdf"><h3>Possession of Fireworks (G.L. c. 148, § 39)</h3><p>No. 7.420. Revised Jun 2005</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/7440-registering-bets.pdf"><h3>Registering Bets (G.L. c. 271, § 17)</h3><p>No. 7.440. Revised 1988</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/7460-resisting-arrest.pdf"><h3>Resisting Arrest (G.L. c. 268, § 32B)</h3><p>No. 7.460. Revised Jan 2009</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/7480-sexual-conduct-for-a-fee.pdf"><h3>Sexual Conduct for a Fee (G.L. c. 272, § 53A)</h3><p>No. 7.480. Revised 1988</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/7500-unnatural-and-lascivious-act.pdf"><h3>Unnatural and Lascivious Act (G.L. c. 272, § 35)</h3><p>No. 7.500. Revised 1989</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/7520-use-of-telephone-for-betting.pdf"><h3>Use of Telephone for Betting (G.L. c. 271, § 17A)</h3><p>No. 7.520. Revised Jun 1995</p></a></li>
-				<li data-role="list-divider">Firearms and Weapons Offenses</li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/7600-carrying-a-firearm.pdf"><h3>Carrying a Firearm (G.L. c. 269, § 10 [a])</h3><p>No. 7.600. Revised Jun 2006</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/7620-possession-of-a-firearm.pdf"><h3>Possession of a Firearm (G.L. c. 2699, § 10 [h])</h3><p>No. 7.620. Revised Jun 1995</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/7640-defaced-firearm-serial-number.pdf"><h3>Defacing Firearm Serial Number; Receiving a Firearm with a Defaced Serial Number (G.L. c. 269, § 11C)</h3><p>No. 7.640. Revised Jun 2005</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/7660-possession-of-defaced-firearm-during-felony.pdf"><h3>Possession of Firearm with Defaced Serial Number during Felony (G.L. c. 269, § 11B)</h3><p>No. 7.660. Revised Jun 2005</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/7680-carrying-certain-dangerous-weapons.pdf"><h3>Carrying Certain Dangerous Weapons (G.L. c. 269, § 10 [b])</h3><p>No. 7.680. Revised 1988</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/7700-carrying-a-dangerous-weapon-when-arrested.pdf"><h3>Carrying a Dangerous Weapon When Arrested (G.L. c. 269, § 10 [b])</h3><p>No. 7.700. Revised 1988</p></a></li>
-				<li data-role="list-divider">Drug Offenses</li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/7800-distribution-of-a-controlled-substance.pdf"><h3>Distribution of a Controlled Substance; Possession with Intent to Distribute a Controlled Substance (G.L. c. 94C, §§ 32-32D)</h3><p>No. 7.800. Revised 1988</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/7820-possession-of-a-controlled-substance.pdf"><h3>Possession of a Controlled Substance (G.L. c. 94C, § 34)</h3><p>No. 7.820. Revised 1988</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/7840-sale-of-drug-paraphernalia.pdf"><h3>Sale of Drug Paraphernalia; Possession with Intent to Sell Drug Paraphernalia (G.L. c. 94C, § 32I)</h3><p>No. 7.840. Revised Jan 2009</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/7841-sale-of-drug-paraphernalia-definition.pdf"><h3>[Definition of “Drug Paraphernalia” (G.L. c. 94C, § 1)]</h3><p>No. 7.841. Revised Jan 2009</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/7860-school-zone-drug-violation.pdf"><h3>School Zone Drug Violation (G.L. c. 94C, § 32J)</h3><p>No. 7.860. Revised Jan 2009</p></a></li>
-				<li data-role="list-divider">Property Offenses</li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/8100-breaking-and-entering.pdf"><h3>Breaking and Entering (G.L. c. 266, § 16)</h3><p>No. 8.100. Revised Jan 2009</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/8120-burning-insured-property.pdf"><h3>Burning Insured Property (G.L. c. 266, § 10)</h3><p>No. 8.120. Revised Jun 1995</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/8140-burning-personal-property-motor-vehicle-etc.pdf"><h3>Burning Personal Property, Motor Vehicle, etc. (G.L. c. 266, § 5)</h3><p>No. 8.140. Revised 1988</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/8160-forgery.pdf"><h3>Forgery (G.L. c. 267, §§ 1-8)</h3><p>No. 8.160. Revised 1989</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/8180-possession-of-burglarious-tools.pdf"><h3>Possession of Burglarious Tools (G.L. c. 266, § 49)</h3><p>No. 8.180. Revised Jun 2006</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/8200-theft-etc-of-motor-vehicle.pdf"><h3>Theft, Purchase, Receipt, Possession or Concealment of Stolen Motor Vehicle; Malicious Damage to Motor Vehicle; Stealing Parts from Motor Vehicle Taken Without Authority; Concealing Motor Vehicle Thief (G.L. c. 266, § 28)</h3><p>No. 8.200. Revised Jun 1995</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/8220-trespass.pdf"><h3>Trespass (G.L. c. 266, § 120)</h3><p>No. 8.220. Revised Jun 1995</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/8240-uttering.pdf"><h3>Uttering (G.L. c. 267, §§ 5-6)</h3><p>No. 8.240. Revised Jan 2009</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/8260-wanton-destruction-of-property.pdf"><h3>Wanton Destruction of Property (G.L. c. 266, § 127)</h3><p>No. 8.260. Revised Jun 2005</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/8280-wilful-and-malicious-destruction-of-property.pdf"><h3>Wilful and Malicious Destruction of Property (G.L. c. 266, § 127)</h3><p>No. 8.280. Revised Mar 2007</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/8300-wilful-or-wanton-destruction-of-house-of-worship-etc.pdf"><h3>Wilful or Wanton Destruction of House of Worship, Cemetery or School (G.L. c. 266, § 127A)</h3><p>No. 8.300. Revised Jun 1995</p></a></li>
-				<li data-role="list-divider">Larceny Offenses</li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/8400-fraudulent-insurance-claim.pdf"><h3>Fraudulent Insurance Claim (G.L. c. 266, § 111A)</h3><p>No. 8.400. Revised Jun 1995</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/8420-identity-fraud-by-posing-as-another.pdf"><h3>Identity Fraud by Posing as Another (G.L. c. 266, § 37E [b])</h3><p>No. 8.420. Revised Sep 2006</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/8440-identity-fraud-by-obtaining-personal-information.pdf"><h3>Identity Fraud by Obtaining Personal Information (G.L. c. 266, § 37E [c]</h3><p>No. 8.440. Revised Sep 2006</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/8460-larceny-by-check.pdf"><h3>Larceny by Check (G.L. c. 266, § 37)</h3><p>No. 8.460. Revised 1988</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/8480-larceny-by-embezzlement.pdf"><h3>Larceny by Embezzlement (G.L. c. 266, § 30)</h3><p>No. 8.480. Revised Jan 2009</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/8500-larceny-by-false-pretenses.pdf"><h3>Larceny by False Pretenses (G.L. c. 266, § 30)</h3><p>No. 8.500. Revised 1988</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/8520-larceny-by-stealing.pdf"><h3>Larceny by Stealing (G.L. c. 266, § 30)</h3><p>No. 8.520. Revised Jun 1995</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/8521-larceny-by-stealing-verdict-slip.pdf"><h3>[Verdict Slip] Larceny by Stealing (G.L. c. 266, § 30)</h3><p>No. 8.521. Revised Jun 1995</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/8540-larceny-by-stealing-in-a-building.pdf"><h3>Larceny by Stealing in a Building (G.L. c. 266, § 20)</h3><p>No. 8.540. Revised Jan 2009</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/8560-larceny-from-the-person.pdf"><h3>Larceny from the Person (G.L. c. 266, § 25 [b])</h3><p>No. 8.560. Revised 1988</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/8580-larceny-of-leased-or-rented-personal-property.pdf"><h3>Larceny of Leased or Rented Personal Property (G.L. c. 266, § 87)</h3><p>No. 8.580. Revised Jun 1995</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/8600-receiving-stolen-property.pdf"><h3>Receiving Stolen Property (G.L. c. 266, § 60)</h3><p>No. 8.600. Revised Jun 1995</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/8620-shoplifting.pdf"><h3>Shoplifting (G.L. c. 266, § 30A)</h3><p>No. 8.620. Revised Jan 2009</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/8640-unauthorized-transfer-of-sound-recordings.pdf"><h3>Unauthorized Transfer of Sound Recordings (G.L. c. 266, § 143A)</h3><p>No. 8.640. Revised Jun 1995</p></a></li>
-				<li data-role="list-divider">Defense and Justification</li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/9100-defenses-accident.pdf"><h3>Accident</h3><p>No. 9.100. Revised 1988</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/9120-defenses-alibi.pdf"><h3>Alibi</h3><p>No. 9.120. Revised 1989</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/9140-defenses-entrapment.pdf"><h3>Entrapment</h3><p>No. 9.140. Revised Jun 1995</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/9160-defenses-identification.pdf"><h3>Identification</h3><p>No. 9.160. Revised Mar 2007</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/9180-defenses-intoxication.pdf"><h3>Intoxication with Alcohol or Drugs</h3><p>No. 9.180. Revised Jun 1995</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/9200-defenses-lack-of-criminal-responsibility.pdf"><h3>Lack of Criminal Responsibility</h3><p>No. 9.200. Revised Jan 2009</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/9220-defenses-mental-impairment-short-of-insanity.pdf"><h3>Mental Impairment Short of Insanity</h3><p>No. 9.220. Revised 1988</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/9240-defenses-necessity-or-duress.pdf"><h3>Necessity or Duress</h3><p>No. 9.240. Revised Jul 1997</p></a></li>
-				<li><a href="http://www.mass.gov/courts/docs/courts-and-judges/courts/district-court/jury-instructions-criminal/6000-9999/9260-defenses-self-defense.pdf"><h3>Self-Defense; Defense of Another; Defense of Property</h3><p>No. 9.260. Revised Jan 2009</p></a></li>
 			</ul>
  		</div><!-- /content -->
 </div><!-- /#home -->
