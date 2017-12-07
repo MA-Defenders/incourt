@@ -383,16 +383,17 @@
 				}).then(function() {
 					// 3. Initialize and make the API request.
 					return gapi.client.request({
-						'path': 'https://sheets.googleapis.com/v4/spreadsheets/1_9Dsm5fSX2P8vzKlY3Y9jjwkxsFYzpIi9FLMTe6XNtc/values/Practice_Guides!A1:B4',
+						'path': 'https://sheets.googleapis.com/v4/spreadsheets/1_9Dsm5fSX2P8vzKlY3Y9jjwkxsFYzpIi9FLMTe6XNtc/values/Practice_Guides!A1:C4?majorDimension=COLUMNS',
 					})
 				}).then(function(response) {
+					console.log('guides');
 					console.log(response.result.values);
-					$('#practice-guides-list').prepend('<li class="'+response.result.values[0][2]+'"><a href="'+response.result.values[0][1]+
+					$('#practice-guides-list').prepend('<li class="'+response.result.values[2][0]+'"><a class="ui-btn ui-btn-icon-right ui-icon-carat-r" href="'+response.result.values[1][0]+
 					'">'+response.result.values[0][0]+'</a></li>');
 					var index_to_add_after = 0;
 					for(var i=1; i < response.result.values[0].length; i++){
-						$('#model-jury-instructions-list li:eq('+index_to_add_after.toString()+')').after('<li>'
-						+'<a href="' + response.result.values[1][i] + '" target="" class="ui-btn ui-btn-icon-right ui-icon-carat-r"><h3>'+response.result.values[0][i]+'</h3><p>'+response.result.values[2][i]+'</p></a></li>');
+						$('#practice-guides-list li:eq('+index_to_add_after.toString()+')').after('<li class=" ' +
+						response.result.values[2][0] + '"><a href="' + response.result.values[1][i] + '" target="" class="ui-btn ui-btn-icon-right ui-icon-carat-r"><h3>'+response.result.values[0][i]+'</h3></a></li>');
 						index_to_add_after = index_to_add_after + 1;
 					}
 
@@ -403,11 +404,6 @@
 			// 1. Load the JavaScript client library.
 			gapi.load('client', start)
 			</script>
-
-			<li class="crim"><a href="#massprac">MA Criminal Practice</a></li>
-			<li class="crim"><a href="#yad">Criminal Practice (YAD)</a></li>
-			<li class="civ"><a href="#caflprac">Children and Families</a></li>
-			<li class="civ"><a href="#mhprac">Mental Health</a></li>
 		</ul>
  	</div><!-- /content -->
 </div><!-- /#guides -->
