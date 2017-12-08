@@ -124,17 +124,52 @@
 	</div>
 	<div id="duty_body" data-role="content" style="text-align:left;">
 		<ul id="duty-day-resources-list" data-role="listview" data-filter="true" data-filter-placeholder="Search Titles..." data-filter-theme="c" data-theme="c" data-divider-theme="b">
-				<li data-role="list-divider">Quick References</li>
-				<li><a href="#assign">Judicial Assignments</a></li>
-				<li><a href="http://dueprocessr.org/courtcal/" class="ui-btn ui-icon-arrow-u-r ui-btn-icon-right" target="_blank"><h3>Due Processr</h3><p>Indigency status &amp; sentencing calculator</p></a></li>
-				<li><a href="#dispo">Disposition Codes</a></li>
-				<li><a href="master.html" data-prefetch><h3>Master Crime List</h3><p><em>May be slow to load/navigate.</em></p></a></li>
-				<li class="crim"><a href="https://www.publiccounsel.net/ya/wp-content/uploads/sites/6/2015/02/DYS2012Grid.pdf">DYS Sentencing Grid</a></li>
-
-				<li data-role="list-divider">Statutes</li>
 
 				<script src="https://apis.google.com/js/api.js"></script>
-		    <script>
+
+				<script>
+				function start() {
+					// 2. Initialize the JavaScript client library.
+					gapi.client.init({
+						'apiKey': 'AIzaSyB_ozcqHgw1UJoqI4bEm8Fgr3HdK2qhpyo',
+					}).then(function() {
+						// 3. Initialize and make the API request.
+						return gapi.client.request({
+							'path': 'https://sheets.googleapis.com/v4/spreadsheets/1_9Dsm5fSX2P8vzKlY3Y9jjwkxsFYzpIi9FLMTe6XNtc/values/Duty_Day_Resources!A1:CZ30?majorDimension=COLUMNS',
+						})
+					}).then(function(response) {
+						console.log('duty day resources');
+						console.log(response.result.values);
+						$('#duty-day-resources-list').prepend('<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-b">'+response.result.values[0][0]+'</li>');
+						var index_to_add_after = 0;
+						for(var i=1; i < response.result.values[0].length; i++){
+							$('#duty-day-resources-list li:eq('+index_to_add_after.toString()+')').after('<li>'
+							+'<a href="' + response.result.values[1][i] + '" class="ui-btn ui-btn-icon-right ui-icon-carat-r"><h3>'+response.result.values[0][i]+'</h3><p>'+response.result.values[2][i]+'</p></a></li>');
+							index_to_add_after = index_to_add_after + 1;
+						}
+
+						for(var col_index=4; col_index < response.result.values.length; col_index=col_index+4){
+							for(var i=0; i < response.result.values[col_index].length; i++){
+								if (i === 0){
+									$('#duty-day-resources-list li:eq('+index_to_add_after.toString()+')').after('<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-b">'
+										+response.result.values[col_index][0]+'</li>');
+								} else {
+									$('#duty-day-resources-list li:eq('+index_to_add_after.toString()+')').after('<li>'
+									+'<a href="' + response.result.values[col_index+1][i] + '" target="" class="ui-btn ui-btn-icon-right ui-icon-carat-r"><h3>'+response.result.values[col_index][i]+'</h3><p>'+response.result.values[col_index+2][i]+'</p></a></li>');
+								}
+								index_to_add_after = index_to_add_after + 1;
+							}
+						}
+
+					}, function(reason) {
+						console.log('Error: ' + reason.result.error.message);
+					});
+				};
+				// 1. Load the JavaScript client library.
+				gapi.load('client', start)
+				</script>
+
+		    <!-- <script>
 				var sectionList = [];
 		    function start() {
 		      // 2. Initialize the JavaScript client library.
@@ -143,7 +178,7 @@
 		      }).then(function() {
 		        // 3. Initialize and make the API request.
 		        return gapi.client.request({
-		          'path': 'https://sheets.googleapis.com/v4/spreadsheets/1_9Dsm5fSX2P8vzKlY3Y9jjwkxsFYzpIi9FLMTe6XNtc/values/data!A1:E12',
+		          'path': 'https://sheets.googleapis.com/v4/spreadsheets/1_9Dsm5fSX2P8vzKlY3Y9jjwkxsFYzpIi9FLMTe6XNtc/values/Duty_Day_Resources!A1:E12',
 		        })
 		      }).then(function(response) {
 						console.log(response.result.values);
@@ -175,7 +210,7 @@
 		    };
 		    // 1. Load the JavaScript client library.
 		    gapi.load('client', start)
-		    </script>
+		    </script> -->
 		</ul>
  	</div><!-- /content -->
 </div><!-- /#duty -->
