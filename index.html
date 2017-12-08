@@ -1007,15 +1007,37 @@ Doing research on your subway commute? Working at an off-site client meeting? Wh
 		<a href="#about_dir" data-iconpos="notext" data-theme="c" data-icon="info" data-transition="slideup"></a>
 	</div>
 	<div id="services_body" data-role="content" style="text-align:left;">
-		<ul data-role="listview" data-filter="true" data-filter-placeholder="Search..." data-filter-theme="c" data-theme="c" data-divider-theme="b" >
-			<li><a href="http://www.mass.gov/eohhs/provider/guidelines-resources/clinical-treatment/mental-health/dmh-offices/central-office.html">Central Office</a></li>
-			<li><a href="http://www.mass.gov/eohhs/provider/guidelines-resources/clinical-treatment/mental-health/dmh-offices/central-mass-area-worcester-office.html">Central Mass. Area: Worcester</a></li>
-			<li><a href="http://www.mass.gov/eohhs/provider/guidelines-resources/clinical-treatment/mental-health/dmh-offices/western-mass-area-northampton-office.html">Western Mass. Area: Northampton Office</a></li>
-			<li><a href="http://www.mass.gov/eohhs/provider/guidelines-resources/clinical-treatment/mental-health/dmh-offices/southeast-area-brockton-office.html">Southeast Area: Brockton Office</a></li>
-			<li><a href="http://www.mass.gov/eohhs/provider/guidelines-resources/clinical-treatment/mental-health/dmh-offices/metro-southeast-boston-office.html">Metro Boston Area: Boston Office</a></li>
-		    <li><a href="http://www.mass.gov/eohhs/provider/guidelines-resources/clinical-treatment/mental-health/dmh-offices/northeast-suburban-area-tewksbury-office.html">Northeast-Suburban Area: Tewksbury Office</a></li>
-		    <li><a href="http://www.mass.gov/eohhs/provider/guidelines-resources/clinical-treatment/mental-health/dmh-offices/northeast-suburban-area-westborough-office.html"?>Northeast-Suburban Area: Westborough Office</a></li>
-		    <li><a href="http://www.mass.gov/eohhs/provider/guidelines-resources/clinical-treatment/mental-health/dmh-offices/alphabetic-index.html">DMH Site Office by City or Town</a></li>
+		<ul id="dmhoffices-list" data-role="listview" data-filter="true" data-filter-placeholder="Search..." data-filter-theme="c" data-theme="c" data-divider-theme="b" >
+
+			<script>
+			function start() {
+				// 2. Initialize the JavaScript client library.
+				gapi.client.init({
+					'apiKey': 'AIzaSyB_ozcqHgw1UJoqI4bEm8Fgr3HdK2qhpyo',
+				}).then(function() {
+					// 3. Initialize and make the API request.
+					return gapi.client.request({
+						'path': 'https://sheets.googleapis.com/v4/spreadsheets/1_9Dsm5fSX2P8vzKlY3Y9jjwkxsFYzpIi9FLMTe6XNtc/values/DMH_Offices!A1:B8?majorDimension=COLUMNS',
+					})
+				}).then(function(response) {
+					console.log('dmhoffices');
+					console.log(response.result.values);
+					$('#dmhoffices-list').prepend('<li><a class="ui-btn ui-btn-icon-right ui-icon-carat-r" href="'+response.result.values[1][0]+
+					'">'+response.result.values[0][0]+'</a></li>');
+					var index_to_add_after = 0;
+					for(var i=1; i < response.result.values[0].length; i++){
+						$('#dmhoffices-list li:eq('+index_to_add_after.toString()+')').after('<li><a href="' + response.result.values[1][i] + '" target="" class="ui-btn ui-btn-icon-right ui-icon-carat-r"><h3>'+response.result.values[0][i]+'</h3></a></li>');
+						index_to_add_after = index_to_add_after + 1;
+					}
+
+				}, function(reason) {
+					console.log('Error: ' + reason.result.error.message);
+				});
+			};
+			// 1. Load the JavaScript client library.
+			gapi.load('client', start)
+			</script>
+
 		</ul>
  	</div><!-- /content -->
 </div><!-- /#dmhoffices -->
@@ -1134,72 +1156,37 @@ New Bedford, Orleans, Plymouth, Wareham.</p></a></li>
 		<a href="#about_rules" data-iconpos="notext" data-theme="c" data-icon="info" data-transition="slideup"></a>
 	</div>
 	<div id="crimpro_body" data-role="content" style="text-align:left;">
-		<ul data-role="listview" data-filter="true" data-filter-placeholder="Search Titles..." data-filter-theme="c" data-theme="c" data-divider-theme="b">
-  <li><A HREF="http://www.mass.gov/obcbbo/rpcscope.htm"><h3>Preamble</h3><p>a Lawyer's Responsibilities</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpcscope.htm"><h3>Scope</h3></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc1.htm#Rule 1.1" rel="external"><h3>Rule 1.1 </h3><p>Competence</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc1.htm#Rule 1.2" rel="external"><h3>Rule 1.2 </h3><p>Scope of Representation</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc1.htm#Rule 1.3" rel="external"><h3>Rule 1.3 </h3><p>Diligence</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc1.htm#Rule 1.4" rel="external"><h3>Rule 1.4 </h3><p>Communication</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc1.htm#Rule 1.5" rel="external"><h3>Rule 1.5 </h3><p>Fees</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc1.htm#Rule 1.6" rel="external"><h3>Rule 1.6</h3><p>Confidentiality of Information</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc1.htm#Rule 1.7" rel="external"><h3>Rule 1.7</h3><p>Conflict of Interest: General Rule</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc1.htm#Rule 1.8" rel="external"><h3>Rule 1.8</h3><p>Conflict of Interest: Prohibited Transactions</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc1.htm#Rule 1.9" rel="external"><h3>Rule 1.9</h3><p>Conflict of Interest: Former Client</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc1.htm#Rule 1.10" rel="external"><h3>Rule 1.10</h3><p>Imputed Disqualification: General Rule</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc1.htm#Rule 1.11" rel="external"><h3>Rule 1.11</h3><p>Successive Government and Private Employment</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc1.htm#Rule 1.12" rel="external"><h3>Rule 1.12</h3><p>Former Judge or Arbitrator</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc1.htm#Rule 1.13" rel="external"><h3>Rule 1.13</h3><p>Organization as Client</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc1.htm#Rule 1.14" rel="external"><h3>Rule 1.14</h3><p>Client with Diminished Capacity</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc1.htm#Rule 1.15" rel="external"><h3>Rule 1.15</h3><p>Safekeeping Property</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc1.htm#Rule 1.16" rel="external"><h3>Rule 1.16</h3><p>Declining or Terminating Representation</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc1.htm#Rule 1.17" rel="external"><h3>Rule 1.17</h3><p>Sale of Law Practice</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc2.htm#Rule 2.1" rel="external"><h3>Rule 2.1</h3><p>Advisor</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc2.htm#Rule 2.2" rel="external"><h3>Rule 2.2</h3><p>Intermediary</A> [Reserved]</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc2.htm#Rule 2.3" rel="external"><h3>Rule 2.3</h3><p>Evaluation for Use by Third Persons</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc2.htm#Rule 2.4" rel="external"><h3>Rule 2.4</h3><p>Lawyer Serving as Third-Party Neutral</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc3.htm#Rule 3.1" rel="external"><h3>Rule 3.1</h3><p>Meritorious Claims and Contentions</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc3.htm#Rule 3.2" rel="external"><h3>Rule 3.2</h3><p>Expediting Litigation</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc3.htm#Rule 3.3" rel="external"><h3>Rule 3.3</h3><p>Candor Toward The Tribunal</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc3.htm#Rule 3.4" rel="external"><h3>Rule 3.4</h3><p>Fairness to Opposing Party and Counsel</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc3.htm#Rule 3.5" rel="external"><h3>Rule 3.5</h3><p>Impartiality and Decorum of the Tribunal</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc3.htm#Rule 3.6" rel="external"><h3>Rule 3.6</h3><p>Trial Publicity</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc3.htm#Rule 3.7" rel="external"><h3>Rule 3.7</h3><p>Lawyer as Witness</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc3.htm#Rule 3.8" rel="external"><h3>Rule 3.8</h3><p>Special Responsibilities of a Prosecutor</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc3.htm#Rule 3.9" rel="external"><h3>Rule 3.9</h3><p>Advocate in Nonadjudicative Proceedings</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc4.htm#Rule 4.1" rel="external"><h3>Rule 4.1</h3><p>Truthfulness in Statements to Others</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc4.htm#Rule 4.2" rel="external"><h3>Rule 4.2</h3><p>Communication with Person Represented by
-  Counsel</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc4.htm#Rule 4.3" rel="external"><h3>Rule 4.3</h3><p>Dealing with Unrepresented Person</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc4.htm#Rule 4.4" rel="external"><h3>Rule 4.4</h3><p>Respect for Rights of Third Persons</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc5.htm#Rule 5.1" rel="external"><h3>Rule 5.1</h3><p>Responsibilities of a Partner or Supervisory
-  Lawyer</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc5.htm#Rule 5.2" rel="external"><h3>Rule 5.2</h3><p>Responsibilities of a Subordinate Lawyer</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc5.htm#Rule 5.3" rel="external"><h3>Rule 5.3</h3><p>Responsibilities Regarding Nonlawyer Assistants</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc5.htm#Rule 5.4" rel="external"><h3>Rule 5.4</h3><p>Professional Independence of a Lawyer</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc5.htm#Rule 5.5" rel="external"><h3>Rule 5.5</h3><p>Unauthorized Practice of Law</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc5.htm#Rule 5.6" rel="external"><h3>Rule 5.6</h3><p>Restrictions On Right to Practice</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc5.htm#Rule 5.7" rel="external"><h3>Rule 5.7</h3><p>Responsibilities Regarding Law-Related
-  Services</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc6.htm#Rule 6.1" rel="external"><h3>Rule 6.1</h3><p>Voluntary Pro Bono Publico Services</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc6.htm#Rule 6.2" rel="external"><h3>Rule 6.2</h3><p>Accepting Appointments</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc6.htm#Rule 6.3" rel="external"><h3>Rule 6.3</h3><p>Membership in Legal Services Organization</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc6.htm#Rule 6.4" rel="external"><h3>Rule 6.4</h3><p>Law Reform Activities Affecting Client
-  Interests</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc6.htm#Rule 6.5" rel="external"><h3>Rule 6.5</h3><p>Nonprofit and Court-Annexed Limited Legal Services Programs</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc7.htm#Rule 7.1" rel="external"><h3>Rule 7.1</h3><p>Communications Concerning a Lawyer's Services</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc7.htm#Rule 7.2" rel="external"><h3>Rule 7.2</h3><p>Advertising</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc7.htm#Rule 7.3" rel="external"><h3>Rule 7.3</h3><p>Solicitation of Professional Employment</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc7.htm#Rule 7.4" rel="external"><h3>Rule 7.4</h3><p>Communication of Fields of Practice</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc7.htm#Rule 7.5" rel="external"><h3>Rule 7.5</h3><p>Firm Names and Letterheads</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc8.htm#Rule 8.1" rel="external"><h3>Rule 8.1</h3><p>Bar Admission and Disciplinary Matters</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc8.htm#Rule 8.2" rel="external"><h3>Rule 8.2</h3><p>Judicial and Legal Officials</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc8.htm#Rule 8.3" rel="external"><h3>Rule 8.3</h3><p>Reporting Professional Misconduct</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc8.htm#Rule 8.4" rel="external"><h3>Rule 8.4</h3><p>Misconduct</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc8.htm#Rule 8.5" rel="external"><h3>Rule 8.5</h3><p>Disciplinary Authority</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc9.htm#Rule 9.1" rel="external"><h3>Rule 9.1</h3><p>Definitions</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc9.htm#Rule 9.2" rel="external"><h3>Rule 9.2</h3><p>Title</p></a></li>
-  <li><A HREF="http://www.mass.gov/obcbbo/rpc9.htm#history" rel="external">History</a></li>
+		<ul id="rpc-list" data-role="listview" data-filter="true" data-filter-placeholder="Search Titles..." data-filter-theme="c" data-theme="c" data-divider-theme="b">
+
+			<script>
+			function start() {
+				// 2. Initialize the JavaScript client library.
+				gapi.client.init({
+					'apiKey': 'AIzaSyB_ozcqHgw1UJoqI4bEm8Fgr3HdK2qhpyo',
+				}).then(function() {
+					// 3. Initialize and make the API request.
+					return gapi.client.request({
+						'path': 'https://sheets.googleapis.com/v4/spreadsheets/1_9Dsm5fSX2P8vzKlY3Y9jjwkxsFYzpIi9FLMTe6XNtc/values/Rules_of_Professional_Conduct!A1:B20?majorDimension=COLUMNS',
+					})
+				}).then(function(response) {
+					console.log('rpc');
+					console.log(response.result.values);
+					$('#rpc-list').prepend('<li><a class="ui-btn ui-btn-icon-right ui-icon-carat-r" href="'+response.result.values[1][0]+
+					'">'+response.result.values[0][0]+'</a></li>');
+					var index_to_add_after = 0;
+					for(var i=1; i < response.result.values[0].length; i++){
+						$('#rpc-list li:eq('+index_to_add_after.toString()+')').after('<li><a href="' + response.result.values[1][i] + '" target="" class="ui-btn ui-btn-icon-right ui-icon-carat-r"><h3>'+response.result.values[0][i]+'</h3></a></li>');
+						index_to_add_after = index_to_add_after + 1;
+					}
+
+				}, function(reason) {
+					console.log('Error: ' + reason.result.error.message);
+				});
+			};
+			// 1. Load the JavaScript client library.
+			gapi.load('client', start)
+			</script>
+
 		</ul>
  	</div><!-- /content -->
 </div><!-- /#rpc -->
@@ -1215,56 +1202,40 @@ New Bedford, Orleans, Plymouth, Wareham.</p></a></li>
 		<a href="#about_rules" data-iconpos="notext" data-theme="c" data-icon="info" data-transition="slideup"></a>
 	</div>
 	<div id="crimpro_body" data-role="content" style="text-align:left;">
-		<ul data-role="listview" data-filter="true" data-filter-placeholder="Search Titles..." data-filter-theme="c" data-theme="c" data-divider-theme="b">
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim1.html" target=""><h3>Rule 1</h3><p>Title; Scope</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim2.html" target=""><h3>Rule 2</h3><p>Purpose; Construction; Definition of Terms</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim3.html" target=""><h3>Rule 3</h3><p>Complaint And Indictment; Waiver Of Indictment; Probable Cause Hearing</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim3-1.html" target=""><h3>Rule 3.1</h3><p>Determination Of Probable Cause For Detention</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim4.html" target=""><h3>Rule 4</h3><p>Form And Contents Of Complaint Or Indictment; Amendment</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim5.html" target=""><h3>Rule 5</h3><p>The Grand Jury</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim6.html" target=""><h3>Rule 6</h3><p>Summons To Appear; Arrest Warrant</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim7.html" target=""><h3>Rule 7</h3><p>Initial Appearance And Arraignment</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim8.html" target=""><h3>Rule 8</h3><p>Assignment Of Counsel</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim9.html" target=""><h3>Rule 9</h3><p>Joinder Of Offenses Or Defendants</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim10.html" target=""><h3>Rule 10</h3><p>Continuances</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim11.html" target=""><h3>Rule 11</h3><p>Pretrial Conference And Pretrial Hearing</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim12.html" target=""><h3>Rule 12</h3><p>Pleas And Withdrawals Of Pleas</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim13.html" target=""><h3>Rule 13</h3><p>Pretrial Motions</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim14.html" target=""><h3>Rule 14</h3><p>Pretrial Discovery</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim15.html" target=""><h3>Rule 15</h3><p>Interlocutory Appeal</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim16.html" target=""><h3>Rule 16</h3><p>Dismissal By The Prosecution</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim17.html" target=""><h3>Rule 17</h3><p>Summonses For Witnesses</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim18.html" target=""><h3>Rule 18</h3><p>Presence Of Defendant</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim19.html" target=""><h3>Rule 19</h3><p>Trial By Jury Or By The Court</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim20.html" target=""><h3>Rule 20</h3><p>Trial Jurors</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim21.html" target=""><h3>Rule 21</h3><p>Sequestration Of Witnesses</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim22.html" target=""><h3>Rule 22</h3><p>Objections</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim23.html" target=""><h3><strike>Rule 23</strike></h3><p><strike>Statements And Reports Of Witnesses For Impeachment</strike></p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim24.html" target=""><h3>Rule 24</h3><p>Opening Statements; Arguments; Instructions To Jury</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim25.html" target=""><h3>Rule 25</h3><p>Motion For Required Finding Of Not Guilty</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim26.html" target=""><h3>Rule 26</h3><p>Requests For Rulings</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim27.html" target=""><h3>Rule 27</h3><p>Verdict</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim28.html" target=""><h3>Rule 28</h3><p>Judgment</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim29.html" target=""><h3>Rule 29</h3><p>Revision Or Revocation Of Sentence</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim30.html" target=""><h3>Rule 30</h3><p>Postconviction Relief</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim31.html" target=""><h3>Rule 31</h3><p>Stay Of Execution; Relief Pending Review</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim32.html" target=""><h3>Rule 32</h3><p>Filing And Service Of Papers</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim33.html" target=""><h3>Rule 33</h3><p>Counsel For Defendants Indigent Or Indigent But Able To Contribute</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim34.html" target=""><h3>Rule 34</h3><p>Report</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim35.html" target=""><h3>Rule 35</h3><p>Depositions To Perpetuate Testimony</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim36.html" target=""><h3>Rule 36</h3><p>Case Management</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim37.html" target=""><h3>Rule 37</h3><p>Transfer Of Cases</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim38.html" target=""><h3>Rule 38</h3><p>Disability Of Judge</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim39.html" target=""><h3>Rule 39</h3><p>Records Of Foreign Proceedings And Notice Of Foreign Law</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim40.html" target=""><h3>Rule 40</h3><p>Proof Of Official Records</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim41.html" target=""><h3>Rule 41</h3><p>Interpreters And Experts</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim42.html" target=""><h3>Rule 42</h3><p>Clerical Mistakes</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim43.html" target=""><h3>Rule 43</h3><p>Summary Contempt Proceedings</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim44.html" target=""><h3>Rule 44</h3><p>Contempt</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim45.html" target=""><h3>Rule 45</h3><p>Removal Of The Disruptive Defendant</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim46.html" target=""><h3>Rule 46</h3><p>Time</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim47.html" target=""><h3>Rule 47</h3><p>Special Magistrates</p></a></li>
-			<li><a href="http://www.mass.gov/courts/case-legal-res/rules-of-court/criminal-procedure/crim48.html" target=""><h3>Rule 48</h3><p>Sanctions</p></a></li>
+		<ul id="crimpro-list" data-role="listview" data-filter="true" data-filter-placeholder="Search Titles..." data-filter-theme="c" data-theme="c" data-divider-theme="b">
+
+			<script>
+			var sectionList = [];
+			function start() {
+				// 2. Initialize the JavaScript client library.
+				gapi.client.init({
+					'apiKey': 'AIzaSyB_ozcqHgw1UJoqI4bEm8Fgr3HdK2qhpyo',
+				}).then(function() {
+					// 3. Initialize and make the API request.
+					return gapi.client.request({
+						'path': 'https://sheets.googleapis.com/v4/spreadsheets/1_9Dsm5fSX2P8vzKlY3Y9jjwkxsFYzpIi9FLMTe6XNtc/values/Criminal_Procedure!A1:C20?majorDimension=COLUMNS',
+					})
+				}).then(function(response) {
+					console.log('crimpro');
+					console.log(response.result.values);
+					$('#crimpro-list').prepend('<li>'+'<a href="' + response.result.values[1][0] + '" target="" class="ui-btn ui-btn-icon-right ui-icon-carat-r"><h3>'
+						+response.result.values[0][0]+'</h3><p>'+ response.result.values[2][0] +'</p></a></li>');
+					var index_to_add_after = 0;
+					for(var i=1; i < response.result.values[0].length; i++){
+						$('#crimpro-list li:eq('+index_to_add_after.toString()+')').after('<li>'
+						+'<a href="' + response.result.values[1][i] + '" target="" class="ui-btn ui-btn-icon-right ui-icon-carat-r"><h3>'+response.result.values[0][i]+'</h3><p>'
+						+ response.result.values[2][i] +'</p></a></li>');
+						index_to_add_after = index_to_add_after + 1;
+					}
+
+				}, function(reason) {
+					console.log('Error: ' + reason.result.error.message);
+				});
+			};
+			// 1. Load the JavaScript client library.
+			gapi.load('client', start)
+			</script>
+
 		</ul>
  	</div><!-- /content -->
 </div><!-- /#crimpro -->
