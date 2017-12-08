@@ -416,10 +416,37 @@
 		<a href="#about_apps" data-iconpos="notext" data-theme="c" data-icon="info" data-transition="slideup"></a>
 	</div>
 	<div id="gloss_body" data-role="content" style="text-align:left;">
-		<ul data-role="listview" data-filter="false" data-theme="c" data-divider-theme="b">
-				<li><a href="#iphone">iPhone</a></li>
-				<li><a href="#android">Android</a></li>
-				<li><a href="mailto:incourt@davidcolarusso.com" target="_top"><h3>Contact Curator</h2><p>Tap to email. Suggestions welcome.</p></a></li>
+		<ul id="applications-list" data-role="listview" data-filter="false" data-theme="c" data-divider-theme="b">
+
+			<script>
+			function start() {
+				// 2. Initialize the JavaScript client library.
+				gapi.client.init({
+					'apiKey': 'AIzaSyB_ozcqHgw1UJoqI4bEm8Fgr3HdK2qhpyo',
+				}).then(function() {
+					// 3. Initialize and make the API request.
+					return gapi.client.request({
+						'path': 'https://sheets.googleapis.com/v4/spreadsheets/1_9Dsm5fSX2P8vzKlY3Y9jjwkxsFYzpIi9FLMTe6XNtc/values/Legal_Apps!A1:B3?majorDimension=COLUMNS',
+					})
+				}).then(function(response) {
+					console.log('application');
+					console.log(response.result.values);
+					$('#applications-list').prepend('<li><a class="ui-btn ui-btn-icon-right ui-icon-carat-r" href="'+response.result.values[1][0]+
+					'">'+response.result.values[0][0]+'</a></li>');
+					var index_to_add_after = 0;
+					for(var i=1; i < response.result.values[0].length; i++){
+						$('#applications-list li:eq('+index_to_add_after.toString()+')').after('<li><a href="' + response.result.values[1][i] + '" target="" class="ui-btn ui-btn-icon-right ui-icon-carat-r"><h3>'+response.result.values[0][i]+'</h3></a></li>');
+						index_to_add_after = index_to_add_after + 1;
+					}
+
+				}, function(reason) {
+					console.log('Error: ' + reason.result.error.message);
+				});
+			};
+			// 1. Load the JavaScript client library.
+			gapi.load('client', start)
+			</script>
+
 		</ul>
  	</div><!-- /content -->
 </div><!-- /#applications -->
@@ -572,15 +599,37 @@ Doing research on your subway commute? Working at an off-site client meeting? Wh
 		<a href="#about_dir" data-iconpos="notext" data-theme="c" data-icon="info" data-transition="slideup"></a>
 	</div>
 	<div id="dir_body" data-role="content" style="text-align:left;">
-		<ul data-role="listview" data-filter="true" data-filter-placeholder="Search Titles..." data-filter-theme="c" data-theme="c" data-divider-theme="b">
-				<li><a href="#bbo" target="">BBO Lookup</a></li>
-				<li><a href="http://www.mass.gov/courts/court-info/courthouses/">Courts</a></li>
-				<li><a href="http://www.publiccounsel.net/dir/#cpcs_dir">CPCS</a></li>
-				<li><a href="http://www.masslegalservices.org/findlegalaid">Mass Legal Services</a></li>
-				<li class="crim"><a href="DAs.html">District Attorneys</a></li>
-				<li class="crim"><a href="doc.html">DOC</a></li>
-				<li><a href="#services">Social Services</a></li>
-				<li class="civ"><a href="#dmhoffices">DMH Offices</a></li>
+		<ul id='dir-list' data-role="listview" data-filter="true" data-filter-placeholder="Search Titles..." data-filter-theme="c" data-theme="c" data-divider-theme="b">
+
+			<script>
+			function start() {
+				// 2. Initialize the JavaScript client library.
+				gapi.client.init({
+					'apiKey': 'AIzaSyB_ozcqHgw1UJoqI4bEm8Fgr3HdK2qhpyo',
+				}).then(function() {
+					// 3. Initialize and make the API request.
+					return gapi.client.request({
+						'path': 'https://sheets.googleapis.com/v4/spreadsheets/1_9Dsm5fSX2P8vzKlY3Y9jjwkxsFYzpIi9FLMTe6XNtc/values/Directories!A1:B8?majorDimension=COLUMNS',
+					})
+				}).then(function(response) {
+					console.log('dir');
+					console.log(response.result.values);
+					$('#dir-list').prepend('<li><a class="ui-btn ui-btn-icon-right ui-icon-carat-r" href="'+response.result.values[1][0]+
+					'">'+response.result.values[0][0]+'</a></li>');
+					var index_to_add_after = 0;
+					for(var i=1; i < response.result.values[0].length; i++){
+						$('#dir-list li:eq('+index_to_add_after.toString()+')').after('<li><a href="' + response.result.values[1][i] + '" class="ui-btn ui-btn-icon-right ui-icon-carat-r"><h3>'+response.result.values[0][i]+'</h3></a></li>');
+						index_to_add_after = index_to_add_after + 1;
+					}
+
+				}, function(reason) {
+					console.log('Error: ' + reason.result.error.message);
+				});
+			};
+			// 1. Load the JavaScript client library.
+			gapi.load('client', start)
+			</script>
+
 		</ul>
  	</div><!-- /content -->
 </div><!-- /#dir -->
@@ -882,73 +931,50 @@ Doing research on your subway commute? Working at an off-site client meeting? Wh
 		<a href="#about_guides" data-iconpos="notext" data-theme="c" data-icon="info" data-transition="slideup"></a>
 	</div>
 	<div id="legal_body" data-role="content" style="text-align:left;">
-		<ul data-role="listview" data-filter="true" data-filter-placeholder="Search..." data-filter-theme="c" data-theme="c" data-divider-theme="b">
-			<li data-role="list-divider" data-role="collapsible">ABOUT</li>
-				<li><a href="http://www.suffolk.edu/law/faculty/EditorsandContributors.php">Editors/Contributors</a></li>
-				<li><a href="http://www.suffolk.edu/law/faculty/Prefaces.php">Preface</a></li>
-			<li data-role="list-divider" data-role="collapsible">PART I: PROCEEDINGS AND STRATEGIES IN DISTRICT COURT</li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch1DistrictCourtJurisdiction.pdf">Trial or Probable-Cause Hearing: Determining the Role of the District Court</a></li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch2ProbableCauseHearings.pdf">Probable-Cause Hearings</a></li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch3DistrictCourtTrials.pdf">District Court Trials</a></li>
-<li data-role="list-divider" data-role="collapsible">PART II: INITIATION OF CRIMINAL PROCEEDINGS</li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch4ComplaintsandIndictments.pdf">Complaints and Indictments</a></li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch5GrandJuryIssues.pdf">Grand Jury Issues</a></li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch6InterstateRendition.pdf">Interstate Rendition and the Agreement on Detainers</a></li>
-<li data-role="list-divider" data-role="collapsible">PART III: ARRAIGNMENT AND RELATED ISSUES</li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch7Arraignment.pdf">Arraignment and Related Issues  </a></li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch8RighttoCounsel.pdf">The Right to Counsel</a></li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch9PretrialReleaseBailandPretrialDetention.pdf">Pretrial Release, Bail, and Pretrial Detention</a></li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch10CompetencytoStandTrial.pdf">Competency to Stand Trial  </a></li>
-<li data-role="list-divider" data-role="collapsible">PART IV: PREPARING THE CASE</li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch11InvestigationandInterviewing.pdf">Investigation and Interviewing; Directory of Sources </a></li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch12Forensics.pdf">Forensic Science and Expert Testimony</a></li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch13Summons.pdf">Summoning Witnesses  </a></li>
-<li data-role="list-divider" data-role="collapsible">PART V: PRETRIAL PROCEEDINGS</li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch14PTConference.pdf">The Pretrial Conference  </a></li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch15PretrialMotions.pdf">Pretrial Motions and Pretrial Hearings</a></li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch16Discovery.pdf">Discovery</a></li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch17SearchandSeizure.pdf">Search and Seizure</a></li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch18EyewitnessIdentification.pdf">Issues in Eyewitness Identification Cases</a></li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch19Confessions.pdf">Confessions</a></li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch20DefectsintheComplaintorIndictment.pdf">Defects in the Complaint or Indictment  </a></li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch21DoubleJeopardy.pdf">Double Jeopardy</a></li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch22JoinderandSeverance.pdf">Joinder and Severance</a></li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch23SpeedyTrialandRelatedIssues.pdf">Speedy Trial and Related Issues</a></li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch24SelectiveorVindictiveTreatment.pdf">Selective or Vindictive Treatment</a></li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch25JudicialDisqualification.pdf">Judicial Disqualification: The Motion to Recuse</a></li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch26PTPub.pdf">Motions Related to Prejudicial Publicity</a></li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch27Continuances.pdf">Motion for a Continuance  </a></li>
-<li data-role="list-divider" data-role="collapsible">PART VI: TRIAL PROCEEDINGS</li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch28SecurityRestraints.pdf">Defendant’s Presence and Appearance at Trial / Security Restraints</a></li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch29RecordoftheProceedings.pdf">Record of the Proceedings</a></li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch30JurySelection.pdf">Juror Examination and Selection  </a></li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch31Openings.pdf">The Opening Statement</a></li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch32examofws.pdf">Examination of Witnesses</a></li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch33WitnessSelfIncrimination.pdf">Witness’s Privilege Against Self-Incrimination</a></li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch34trialmotions.pdf">Trial Motions</a></li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch35Closings.pdf">The Closing Argument</a></li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch36Jury.pdf">The Jury: Contamination, Instructions, Deliberation, and Verdict</a></li>
-<li data-role="list-divider" data-role="collapsible">PART VII:  PLEAS, SENTENCES &amp; COLLATERAL CONSEQUENCES</li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch37Pleas.pdf">Plea Bargaining and Guilty Pleas</a></li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch38ResourceDir.pdf">Directory of Sentencing Alternatives</a></li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch39Sentencing.pdf">Dispositions and Sentencing Advocacy  </a></li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch40ImprisonmentandRelease.pdf">Imprisonment and Release from Custody</a></li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch41ProbationRevocation.pdf">Probation Revocation  </a></li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch42ImmigrationConsequences.pdf">Immigration Consequences of Criminal Proceedings  </a></li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch43CivilConsequences.pdf">Civil Consequences of Criminal Cases</a></li>
-<li data-role="list-divider" data-role="collapsible">PART VIII: APPELLATE AND POSTCONVICTION REMEDIES</li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch44PostconvictionRemedies.pdf">Postconviction Remedies</a></li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch45Appeals.pdf">Appeals</a></li>
-<li data-role="list-divider" data-role="collapsible">PART IX: SPECIAL ISSUES</li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch46Contempt.pdf">Contempt</a></li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch47OUI.pdf">Operating Under the Influence</a></li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch48childabuse.pdf">Cases Alleging Child Abuse</a></li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch49Delinquency.pdf">Delinquency Proceedings  </a></li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch50RestrainingOrderViolations.pdf">Restraining Order Violations</a></li>
-<li data-role="list-divider" data-role="collapsible">PART X: RESEARCHING MASSACHUSETTS CRIMINAL LAW</li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch51Research.pdf">Guide to Researching Massachusetts Criminal Practice and Procedure</a></li>
-				<li><a href="http://www.suffolk.edu/documents/LawMCP/Ch52CourtRulesLinks.pdf">Links to Court Rules</a></li>
+		<ul id='massprac-list' data-role="listview" data-filter="true" data-filter-placeholder="Search..." data-filter-theme="c" data-theme="c" data-divider-theme="b">
 
+			<script>
+			var sectionList = [];
+			function start() {
+				// 2. Initialize the JavaScript client library.
+				gapi.client.init({
+					'apiKey': 'AIzaSyB_ozcqHgw1UJoqI4bEm8Fgr3HdK2qhpyo',
+				}).then(function() {
+					// 3. Initialize and make the API request.
+					return gapi.client.request({
+						'path': 'https://sheets.googleapis.com/v4/spreadsheets/1_9Dsm5fSX2P8vzKlY3Y9jjwkxsFYzpIi9FLMTe6XNtc/values/MA_Crim_Practice!A1:CZ30?majorDimension=COLUMNS',
+					})
+				}).then(function(response) {
+					console.log('massprac')
+					console.log(response.result.values);
+					$('#massprac-list').prepend('<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-b">'+response.result.values[0][0]+'</li>');
+					var index_to_add_after = 0;
+					for(var i=1; i < response.result.values[0].length; i++){
+						$('#massprac-list li:eq('+index_to_add_after.toString()+')').after('<li>'
+						+'<a href="' + response.result.values[1][i] + '" target="" class="ui-btn ui-btn-icon-right ui-icon-carat-r"><h3>'+response.result.values[0][i]+'</h3></a></li>');
+						index_to_add_after = index_to_add_after + 1;
+					}
+
+					for(var col_index=3; col_index < response.result.values.length; col_index=col_index+3){
+						for(var i=0; i < response.result.values[col_index].length; i++){
+							if (i === 0){
+								$('#massprac-list li:eq('+index_to_add_after.toString()+')').after('<li data-role="list-divider" role="heading" class="ui-li-divider ui-bar-b">'
+									+response.result.values[col_index][0]+'</li>');
+							} else {
+								$('#massprac-list li:eq('+index_to_add_after.toString()+')').after('<li>'
+								+'<a href="' + response.result.values[col_index+1][i] + '" target="" class="ui-btn ui-btn-icon-right ui-icon-carat-r"><h3>'+response.result.values[col_index][i]+'</h3></a></li>');
+							}
+							index_to_add_after = index_to_add_after + 1;
+						}
+					}
+
+				}, function(reason) {
+					console.log('Error: ' + reason.result.error.message);
+				});
+			};
+			// 1. Load the JavaScript client library.
+			gapi.load('client', start)
+			</script>
 
 		</ul>
  	</div><!-- /content -->
